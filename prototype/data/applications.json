@@ -1,0 +1,256 @@
+{
+  "_note": "SYNTHETIC DEMO DATA for the SAMPARK-SATYA SIH prototype. Institutions, people, PANs and document numbers are fictional.",
+  "academic_year_start": "2024-08-01",
+  "applications": [
+    {
+      "id": "EOA-2024-100234",
+      "institution_id": "AICTE-1-100234",
+      "institution_name": "Apex Institute of Technology",
+      "city": "Pune", "state": "Maharashtra", "region": "Western",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-12",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 480, "verified_faculty_count": 26,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2025-06-30", "location_type": "URBAN", "declared_land_acres": 3.2
+      },
+      "documents": [
+        {"doc_id": "DOC-APEX-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "Maharashtra Fire Services e-Portal", "valid_till": "2025-06-30", "institution_name": "Apex Institute of Technology"},
+         "forensics": {"has_digital_signature": true, "modified_after_sign": false, "ela_altered": false}},
+        {"doc_id": "DOC-APEX-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "Pune Municipal Corporation", "valid_till": "2099-12-31", "institution_name": "Apex Institute of Technology"},
+         "forensics": {"has_digital_signature": true, "modified_after_sign": false, "ela_altered": false}},
+        {"doc_id": "DOC-APEX-LAND", "doc_type": "LAND_TITLE", "label": "Land Title / 7-12 Extract",
+         "declared_extra": {"survey_number": "Sy. No. 214/1"},
+         "authority_response": {"source_authority": "Maharashtra Mahabhumi (Revenue Dept.)", "institution_name": "Apex Institute of Technology", "survey_number": "Sy. No. 214/1"}},
+        {"doc_id": "DOC-APEX-PLAN", "doc_type": "BUILDING_PLAN", "label": "Approved Building Plan",
+         "authority_response": {"source_authority": "Pune Municipal Corporation", "institution_name": "Apex Institute of Technology"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-200541",
+      "institution_id": "AICTE-1-200541",
+      "institution_name": "Sunrise Engineering College",
+      "city": "Bhopal", "state": "Madhya Pradesh", "region": "Central",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-18",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 480, "verified_faculty_count": 21,
+        "occupancy_certificate_type": "PROVISIONAL", "consecutive_provisional_oc_years": 1,
+        "fire_noc_valid_till": "2024-05-15", "location_type": "URBAN", "declared_land_acres": 2.8
+      },
+      "documents": [
+        {"doc_id": "DOC-SUNRISE-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "MP Fire Services", "valid_till": "2024-05-15", "is_expired": true, "institution_name": "Sunrise Engineering College"},
+         "forensics": {"has_digital_signature": false, "modified_after_sign": false, "ela_altered": false}},
+        {"doc_id": "DOC-SUNRISE-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Provisional, Yr 2 of 2)",
+         "authority_response": {"source_authority": "Bhopal Municipal Corporation", "valid_till": "2025-03-31", "institution_name": "Sunrise Engineering College"}},
+        {"doc_id": "DOC-SUNRISE-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Khasra)",
+         "authority_response": {"source_authority": "MP Bhulekh", "institution_name": "Sunrise Engineering College"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-310202",
+      "institution_id": "AICTE-1-310202",
+      "institution_name": "Vidya Polytechnic & Engineering College",
+      "city": "Coimbatore", "state": "Tamil Nadu", "region": "Southern",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-05",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 240, "verified_faculty_count": 13,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2025-09-30", "location_type": "URBAN", "declared_land_acres": 3.0
+      },
+      "documents": [
+        {"doc_id": "DOC-VIDYA-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "Tamil Nadu Fire & Rescue Services", "valid_till": "2025-09-30", "institution_name": "Vidya Polytechnic & Engineering College"},
+         "forensics": {"has_digital_signature": true, "modified_after_sign": false, "ela_altered": false}},
+        {"doc_id": "DOC-VIDYA-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "Coimbatore City Municipal Corporation", "institution_name": "Vidya Polytechnic & Engineering College"}},
+        {"doc_id": "DOC-VIDYA-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Patta)",
+         "authority_response": {"source_authority": "TN e-Services Patta / Chitta", "institution_name": "Vidya Polytechnic & Engineering College"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-101101",
+      "institution_id": "AICTE-1-101101",
+      "institution_name": "Greenfield Institute of Technology",
+      "city": "Hyderabad", "state": "Telangana", "region": "Southern",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-09",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 360, "verified_faculty_count": 20,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2025-12-31", "location_type": "URBAN", "declared_land_acres": 4.1
+      },
+      "documents": [
+        {"doc_id": "DOC-GREEN-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "Telangana State Disaster Response & Fire Services", "valid_till": "2025-12-31", "institution_name": "Greenfield Institute of Technology"},
+         "forensics": {"has_digital_signature": true, "modified_after_sign": false, "ela_altered": false}},
+        {"doc_id": "DOC-GREEN-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "GHMC", "institution_name": "Greenfield Institute of Technology"}},
+        {"doc_id": "DOC-GREEN-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Dharani)",
+         "authority_response": {"source_authority": "Telangana Dharani Portal", "institution_name": "Greenfield Institute of Technology"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-499102",
+      "institution_id": "AICTE-1-499102",
+      "institution_name": "Royal Institute of Advanced Studies",
+      "city": "Jaipur", "state": "Rajasthan", "region": "North-Western",
+      "application_type": "Increase in Intake (+120 seats)",
+      "submitted_on": "2024-03-21",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 600, "verified_faculty_count": 31,
+        "occupancy_certificate_type": "PROVISIONAL", "consecutive_provisional_oc_years": 2,
+        "fire_noc_valid_till": "2027-03-31", "location_type": "URBAN", "declared_land_acres": 2.9
+      },
+      "documents": [
+        {"doc_id": "DOC-ROYAL-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC (declared valid till 2027)",
+         "authority_response": {"source_authority": "Rajasthan Fire Services", "valid_till": "2027-03-31", "institution_name": "Royal Institute of Advanced Studies"},
+         "forensics": {"has_digital_signature": true, "modified_after_sign": true, "ela_altered": true, "altered_region": "Fire NOC expiry year '2027'"}},
+        {"doc_id": "DOC-ROYAL-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate",
+         "authority_response": {"source_authority": "Jaipur Development Authority", "valid_till": "2025-01-31", "institution_name": "Royal Institute of Advanced Studies"}},
+        {"doc_id": "DOC-ROYAL-LAND", "doc_type": "LAND_TITLE", "label": "Registered Sale Deed",
+         "authority_response": {"source_authority": "Rajasthan Apna Khata", "institution_name": "Royal Institute of Advanced Studies"}}
+      ],
+      "affidavit": {
+        "claims": {"sworn_occupancy_type": "PERMANENT OCCUPANCY CERTIFICATE", "sworn_survey_number": "Plot No. 42/A", "sworn_built_up_area_sqm": 16500.0},
+        "evidence": {"attached_occupancy_type": "PROVISIONAL TEMPORARY OCCUPANCY", "attached_survey_number": "Plot No. 42/B (Unregistered Annex)", "attached_floor_plan_area_sqm": 11200.0}
+      }
+    },
+    {
+      "id": "EOA-2024-520771",
+      "institution_id": "AICTE-1-520771",
+      "institution_name": "Krishna Valley Institute of Technology",
+      "city": "Guntur", "state": "Andhra Pradesh", "region": "Southern",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-14",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 300, "verified_faculty_count": 16,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2025-08-31", "location_type": "URBAN", "declared_land_acres": 3.5
+      },
+      "documents": [
+        {"doc_id": "DOC-KVIT-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "AP State Disaster Response & Fire Services", "valid_till": "2025-08-31", "institution_name": "Krishna Valley Institute of Technology"}},
+        {"doc_id": "DOC-KVIT-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "Guntur Municipal Corporation", "institution_name": "Krishna Valley Institute of Technology"}},
+        {"doc_id": "DOC-KVIT-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Adangal / 1-B)",
+         "declared_extra": {"survey_number": "Sy. No. 118/2"},
+         "authority_response": {"source_authority": "AP Meebhoomi", "institution_name": "Krishna Valley Institute of Technology", "survey_number": "Sy. No. 118/2A"}},
+        {"doc_id": "DOC-KVIT-PLAN", "doc_type": "BUILDING_PLAN", "label": "Approved Building Plan",
+         "authority_response": {"source_authority": "AP DPMS", "institution_name": "Krishna Valley Institute of Technology"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-610450",
+      "institution_id": "AICTE-1-610450",
+      "institution_name": "Brahmaputra Institute of Engineering",
+      "city": "Guwahati", "state": "Assam", "region": "North-Eastern",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-25",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 240, "verified_faculty_count": 13,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2025-07-31", "location_type": "URBAN", "declared_land_acres": 2.7
+      },
+      "documents": [
+        {"doc_id": "DOC-BIE-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "source_online": false,
+         "authority_response": {"source_authority": "Assam Fire & Emergency Services"}},
+        {"doc_id": "DOC-BIE-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "Guwahati Municipal Corporation", "institution_name": "Brahmaputra Institute of Engineering"}},
+        {"doc_id": "DOC-BIE-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Jamabandi)",
+         "authority_response": null}
+      ]
+    },
+    {
+      "id": "EOA-2024-705118",
+      "institution_id": "AICTE-1-705118",
+      "institution_name": "Kaveri Engineering College",
+      "city": "Mysuru", "state": "Karnataka", "region": "South-Western",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-02",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 420, "verified_faculty_count": 23,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2026-01-31", "location_type": "RURAL", "declared_land_acres": 10.0
+      },
+      "documents": [
+        {"doc_id": "DOC-KAVERI-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "Karnataka State Fire & Emergency Services", "valid_till": "2026-01-31", "institution_name": "Kaveri Engineering College"},
+         "forensics": {"has_digital_signature": true, "modified_after_sign": false, "ela_altered": false}},
+        {"doc_id": "DOC-KAVERI-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "Mysuru Urban Development Authority", "institution_name": "Kaveri Engineering College"}},
+        {"doc_id": "DOC-KAVERI-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (RTC / Bhoomi)",
+         "authority_response": {"source_authority": "Karnataka Bhoomi", "institution_name": "Kaveri Engineering College"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-812093",
+      "institution_id": "AICTE-1-812093",
+      "institution_name": "Ganga Technical Campus",
+      "city": "Varanasi", "state": "Uttar Pradesh", "region": "Northern",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-28",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 300, "verified_faculty_count": 15,
+        "occupancy_certificate_type": "PROVISIONAL", "consecutive_provisional_oc_years": 2,
+        "fire_noc_valid_till": "2025-04-30", "location_type": "URBAN", "declared_land_acres": 2.3
+      },
+      "documents": [
+        {"doc_id": "DOC-GANGA-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "UP Fire & Emergency Services", "valid_till": "2025-04-30", "institution_name": "Ganga Technical Campus"}},
+        {"doc_id": "DOC-GANGA-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Provisional, Yr 3)",
+         "authority_response": {"source_authority": "Varanasi Development Authority", "institution_name": "Ganga Technical Campus"}},
+        {"doc_id": "DOC-GANGA-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Khatauni)",
+         "authority_response": {"source_authority": "UP Bhulekh", "institution_name": "Ganga Technical Campus"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-903377",
+      "institution_id": "AICTE-1-903377",
+      "institution_name": "Shivalik Institute of Engineering",
+      "city": "Mohali", "state": "Punjab", "region": "Northern",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-07",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 180, "verified_faculty_count": 10,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2025-10-31", "location_type": "METRO", "declared_land_acres": 1.8
+      },
+      "documents": [
+        {"doc_id": "DOC-SHIV-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "Punjab Fire Services", "valid_till": "2025-10-31", "institution_name": "Shivalik Institute of Engineering"},
+         "forensics": {"has_digital_signature": true, "modified_after_sign": false, "ela_altered": false}},
+        {"doc_id": "DOC-SHIV-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "GMADA", "institution_name": "Shivalik Institute of Engineering"}},
+        {"doc_id": "DOC-SHIV-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Jamabandi)",
+         "authority_response": {"source_authority": "Punjab PLRS", "institution_name": "Shivalik Institute of Engineering"}}
+      ]
+    },
+    {
+      "id": "EOA-2024-330915",
+      "institution_id": "AICTE-1-330915",
+      "institution_name": "Sri Venkateswara Engineering College",
+      "city": "Chennai", "state": "Tamil Nadu", "region": "Southern",
+      "application_type": "Extension of Approval (EoA) 2024-25",
+      "submitted_on": "2024-03-11",
+      "application": {
+        "program": "ENGINEERING_UG", "total_approved_intake": 360, "verified_faculty_count": 21,
+        "occupancy_certificate_type": "PERMANENT", "consecutive_provisional_oc_years": 0,
+        "fire_noc_valid_till": "2025-11-30", "location_type": "METRO", "declared_land_acres": 2.2
+      },
+      "documents": [
+        {"doc_id": "DOC-SVEC-FIRE", "doc_type": "FIRE_NOC", "label": "Fire Safety NOC",
+         "authority_response": {"source_authority": "Tamil Nadu Fire & Rescue Services", "valid_till": "2025-11-30", "institution_name": "Sri Venkateswara Engineering College"}},
+        {"doc_id": "DOC-SVEC-OC", "doc_type": "OCCUPANCY_CERTIFICATE", "label": "Occupancy Certificate (Permanent)",
+         "authority_response": {"source_authority": "Greater Chennai Corporation", "institution_name": "Sri Venkateswara Engineering College"}},
+        {"doc_id": "DOC-SVEC-LAND", "doc_type": "LAND_TITLE", "label": "Land Title (Patta)",
+         "authority_response": {"source_authority": "TN e-Services Patta / Chitta", "institution_name": "Sri Venkateswara Engineering College"}}
+      ]
+    }
+  ]
+}

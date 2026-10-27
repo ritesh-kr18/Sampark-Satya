@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATYA-SHIKSHA | AICTE Higher Education Regulatory Compliance & Document Authentication</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        govNavy: '#0B2545',
+                        govBlue: '#133B5C',
+                        govLightBlue: '#1D4E89',
+                        govSaffron: '#F58220',
+                        govGreen: '#138808',
+                        govBg: '#F4F7FB'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .tricolor-bar {
+            height: 5px;
+            background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #138808 66.6%, #138808 100%);
+        }
+        .stamp-watermark {
+            background-image: radial-gradient(#133b5c 0.75px, transparent 0.75px);
+            background-size: 16px 16px;
+        }
+        .ela-heatmap {
+            background: radial-gradient(circle at 62% 48%, rgba(255, 0, 0, 0.85) 0%, rgba(255, 120, 0, 0.6) 20%, rgba(0, 0, 0, 0.9) 55%);
+        }
+    </style>
+</head>
+<body class="bg-govBg text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Top Indian Flag Ribbon -->
+    <div class="tricolor-bar"></div>
+
+    <!-- Official Government Header -->
+    <header class="bg-govNavy text-white shadow-md border-b-2 border-govSaffron">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-4">
+            <!-- Left: AICTE Official Emblem & AICTE Branding -->
+            <div class="flex items-center gap-3">
+                <!-- AICTE Official Logo (SVG vector with cogwheel, diploma, and flame) -->
+                <div class="w-12 h-12 bg-white rounded-full p-1 flex items-center justify-center shadow-md border-2 border-govSaffron shrink-0" title="All India Council for Technical Education">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <!-- Outer Cogwheel ring (Technical Education) -->
+                        <circle cx="50" cy="50" r="46" fill="#133B5C" stroke="#F58220" stroke-width="3"/>
+                        <circle cx="50" cy="50" r="38" fill="#FFFFFF"/>
+                        <!-- Cog teeth around ring -->
+                        <path d="M48 4 h4 v6 h-4 z M48 90 h4 v6 h-4 z M4 48 h6 v4 h-6 z M90 48 h6 v4 h-6 z M17 17 l4 4 l-3 3 l-4 -4 z M79 79 l4 4 l-3 3 l-4 -4 z M17 83 l4 -4 l3 3 l-4 4 z M79 21 l4 -4 l3 3 l-4 4 z" fill="#F58220"/>
+                        <!-- Inner Open Book / Academic Knowledge -->
+                        <path d="M28 62 C38 58 46 60 50 64 C54 60 62 58 72 62 L72 42 C62 38 54 40 50 44 C46 40 38 38 28 42 Z" fill="#133B5C"/>
+                        <!-- Burning Lamp / Torch of Learning (Jyoti) -->
+                        <path d="M50 20 Q56 30 50 40 Q44 30 50 20 Z" fill="#F58220"/>
+                        <circle cx="50" cy="28" r="3" fill="#FFD700"/>
+                        <!-- AICTE Text Initials -->
+                        <text x="50" y="74" text-anchor="middle" font-size="9" font-weight="900" fill="#F58220" font-family="sans-serif">AICTE</text>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs tracking-wider uppercase text-amber-300 font-semibold">Ministry of Education • Government of India</span>
+                        <span class="bg-govSaffron/20 border border-govSaffron text-amber-300 text-[10px] font-bold px-1.5 py-0.5 rounded">Digital India</span>
+                    </div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        अखिल भारतीय तकनीकी शिक्षा परिषद (AICTE)
+                    </h1>
+                    <p class="text-xs text-slate-300 flex items-center gap-2">
+                        <span class="text-govSaffron font-bold">SATYA-SHIKSHA (सत्य-शिक्षा)</span> | Higher Education Regulatory Scrutiny & Document Authentication Platform
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right: Satyameva Jayate (State Emblem of India) & Engine Status -->
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <div class="text-xs text-slate-300">Approval Process Handbook</div>
+                    <div class="text-sm font-semibold text-govSaffron">APH 2024–2027 Norms</div>
+                    <div class="inline-flex items-center gap-1.5 mt-0.5">
+                        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                        <span class="text-[10px] font-medium text-emerald-300">Live Secure Engine</span>
+                    </div>
+                </div>
+
+                <!-- Satyameva Jayate National Emblem of India (Official Gov Standard) -->
+                <div class="bg-gradient-to-b from-white/15 to-white/5 rounded-xl px-2.5 py-1.5 flex flex-col items-center justify-center border border-white/25 shadow-sm hover:border-amber-300/40 transition shrink-0" title="भारत का राजचिह्न • State Emblem of India • Satyameva Jayate">
+                    <img 
+                        src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" 
+                        alt="State Emblem of India" 
+                        class="h-11 w-auto object-contain drop-shadow"
+                        onerror="this.style.display='none'; document.getElementById('emblem-vector-fallback').style.display='flex';"
+                    />
+                    <!-- High-Fidelity Vector Fallback if offline -->
+                    <div id="emblem-vector-fallback" class="hidden flex-col items-center justify-center">
+                        <svg viewBox="0 0 100 135" class="w-10 h-13 drop-shadow">
+                            <!-- Golden Ashoka Lion Capital -->
+                            <defs>
+                                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#FFE082" />
+                                    <stop offset="50%" stop-color="#FFB300" />
+                                    <stop offset="100%" stop-color="#FF8F00" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Center Lion Head & Mane -->
+                            <path d="M50 8 C44 8 40 13 40 19 C38 21 37 24 38 27 C36 29 36 33 39 36 C40 43 45 48 50 48 C55 48 60 43 61 36 C64 33 64 29 62 27 C63 24 62 21 60 19 C60 13 56 8 50 8 Z" fill="url(#goldGrad)" />
+                            <!-- Left Lion Profile -->
+                            <path d="M37 16 C31 16 26 21 26 28 C26 34 29 39 34 42 C36 46 38 49 41 51 C37 47 34 42 33 36 C31 35 30 32 31 30 C30 26 32 21 37 16 Z" fill="url(#goldGrad)" />
+                            <!-- Right Lion Profile -->
+                            <path d="M63 16 C69 16 74 21 74 28 C74 34 71 39 66 42 C64 46 62 49 59 51 C63 47 66 42 67 36 C69 35 70 32 69 30 C70 26 68 21 63 16 Z" fill="url(#goldGrad)" />
+                            <!-- Chest, Muscles & Paws -->
+                            <path d="M43 48 C41 54 41 62 42 70 L58 70 C59 62 59 54 57 48 C54 50 46 50 43 48 Z" fill="url(#goldGrad)" />
+                            <!-- Abacus Base -->
+                            <rect x="18" y="70" width="64" height="11" rx="2" fill="#FFFFFF" stroke="#D97706" stroke-width="1"/>
+                            <!-- Ashoka Chakra on Abacus -->
+                            <circle cx="50" cy="75.5" r="4.5" fill="none" stroke="#0B2545" stroke-width="1.2" />
+                            <circle cx="50" cy="75.5" r="1.2" fill="#0B2545" />
+                            <!-- Bull (Left) and Horse (Right) -->
+                            <path d="M28 73 Q32 72 32 77 Q29 78 28 73 Z" fill="#D97706" />
+                            <path d="M72 73 Q68 72 68 77 Q71 78 72 73 Z" fill="#D97706" />
+                            <!-- Bell-shaped Lotus Base -->
+                            <path d="M22 81 C30 84 40 85 50 85 C60 85 70 84 78 81 C75 92 65 97 50 97 C35 97 25 92 22 81 Z" fill="url(#goldGrad)" />
+                            <path d="M30 92 Q50 102 70 92 Q50 96 30 92 Z" fill="#D97706" />
+                        </svg>
+                        <span class="text-[10px] tracking-wide font-extrabold text-amber-200 mt-0.5" style="font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif;">सत्यमेव जयते</span>
+                    </div>
+                    <span class="text-[9.5px] tracking-wider font-extrabold text-amber-300/95 mt-1 border-t border-white/15 pt-0.5" style="font-family: 'Noto Sans Devanagari', 'Mangal', 'Poppins', sans-serif; letter-spacing: 0.08em;">सत्यमेव जयते</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Nav & Role Switcher -->
+    <div class="bg-govBlue text-white shadow-sm border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between">
+            <!-- Navigation Tabs -->
+            <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto py-2" id="navTabs">
+                <button onclick="switchTab('tab-scrutiny')" id="btn-tab-scrutiny" class="nav-btn active px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition flex items-center gap-1.5 bg-govSaffron text-slate-900 font-bold shadow">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    Officer Scrutiny Board
+                </button>
+                <button onclick="switchTab('tab-simulator')" id="btn-tab-simulator" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                    "Shift-Left" Pre-Audit Simulator
+                </button>
+                <button onclick="switchTab('tab-graph')" id="btn-tab-graph" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
+                    <i data-lucide="users" class="w-4 h-4 text-emerald-400"></i>
+                    Faculty Integrity Graph (FIG)
+                </button>
+                <button onclick="switchTab('tab-triangulation')" id="btn-tab-triangulation" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
+                    <i data-lucide="scale" class="w-4 h-4 text-sky-300"></i>
+                    Affidavit vs Evidence Triangulation
+                </button>
+                <button onclick="switchTab('tab-audit')" id="btn-tab-audit" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-purple-300"></i>
+                    6-State Verification & Merkle Audit
+                </button>
+            </nav>
+
+            <!-- Role Badge -->
+            <div class="py-2 flex items-center gap-2 text-xs">
+                <span class="text-slate-300">Active Role:</span>
+                <span class="bg-emerald-900/60 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
+                    <i data-lucide="shield" class="w-3.5 h-3.5"></i> Regulation Bureau Officer
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6">
+
+        <!-- ========================================================================= -->
+        <!-- TAB 1: OFFICER SCRUTINY BOARD                                             -->
+        <!-- ========================================================================= -->
+        <section id="tab-scrutiny" class="space-y-6">
+            <!-- Alert Banner / Advisory Notice -->
+            <div class="bg-amber-50 border-l-4 border-govSaffron p-4 rounded-r-lg shadow-sm flex items-start gap-3">
+                <i data-lucide="alert-circle" class="w-5 h-5 text-govSaffron shrink-0 mt-0.5"></i>
+                <div class="text-xs sm:text-sm text-slate-700">
+                    <strong class="text-slate-900 font-semibold">Statutory Advisory Note:</strong> Under the AICTE Act 1987 and Principles of Natural Justice, AI outputs are 
+                    <strong>decision-support indicators only</strong>. Statutory scrutiny, issuance of show-cause notices, and adverse regulatory actions remain exclusively with authorized AICTE officials.
+                </div>
+            </div>
+
+            <!-- National KPIs -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500 uppercase">Total Applications</div>
+                    <div class="text-2xl font-bold text-slate-900 mt-1">10,482</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">EoA & Expansion 2024–25</div>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 shadow-sm">
+                    <div class="text-xs font-semibold text-emerald-800 uppercase flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Fast-Track EoA
+                    </div>
+                    <div class="text-2xl font-bold text-emerald-700 mt-1">7,840</div>
+                    <div class="text-[11px] text-emerald-600 mt-0.5">Green Track (RTI ≥ 85)</div>
+                </div>
+                <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-sm">
+                    <div class="text-xs font-semibold text-amber-800 uppercase flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span> Deficiency Notices
+                    </div>
+                    <div class="text-2xl font-bold text-amber-700 mt-1">1,812</div>
+                    <div class="text-[11px] text-amber-600 mt-0.5">Amber (10-Day Cure Window)</div>
+                </div>
+                <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 shadow-sm">
+                    <div class="text-xs font-semibold text-rose-800 uppercase flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-rose-500"></span> EVC Inspections
+                    </div>
+                    <div class="text-2xl font-bold text-rose-700 mt-1">830</div>
+                    <div class="text-[11px] text-rose-600 mt-0.5">Red Track (Surprise Visits)</div>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 shadow-sm">
+                    <div class="text-xs font-semibold text-purple-800 uppercase flex items-center gap-1">
+                        <i data-lucide="fingerprint" class="w-3.5 h-3.5 text-purple-600"></i> Ghost Faculty
+                    </div>
+                    <div class="text-2xl font-bold text-purple-700 mt-1">353</div>
+                    <div class="text-[11px] text-purple-600 mt-0.5">Multi-College Collisions</div>
+                </div>
+            </div>
+
+            <!-- Live Application Scrutiny Queue -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 bg-slate-50/50">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="inbox" class="w-4 h-4 text-govBlue"></i>
+                            Regulatory Scrutiny Queue
+                        </h2>
+                        <p class="text-xs text-slate-500">Applications stratified by Regulatory Trust Index (RTI) for risk-targeted officer scrutiny.</p>
+                    </div>
+
+                    <!-- Filter Buttons -->
+                    <div class="flex items-center gap-1.5 bg-slate-200/80 p-1 rounded-lg text-xs">
+                        <button onclick="filterQueue('ALL')" class="queue-filter active px-2.5 py-1 rounded bg-white text-slate-900 font-bold shadow-xs">All (4)</button>
+                        <button onclick="filterQueue('GREEN')" class="queue-filter px-2.5 py-1 rounded text-emerald-800 hover:bg-white/50 font-medium">Green (1)</button>
+                        <button onclick="filterQueue('AMBER')" class="queue-filter px-2.5 py-1 rounded text-amber-800 hover:bg-white/50 font-medium">Amber (1)</button>
+                        <button onclick="filterQueue('RED')" class="queue-filter px-2.5 py-1 rounded text-rose-800 hover:bg-white/50 font-medium">Red Track (2)</button>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-600 border-b border-slate-200 font-semibold text-[11px] uppercase tracking-wider">
+                                <th class="p-3">Application ID & College</th>
+                                <th class="p-3">Program & Intake</th>
+                                <th class="p-3">Trust Score (RTI)</th>
+                                <th class="p-3">Track & Recommendation</th>
+                                <th class="p-3">Key Evidence & Anomalies</th>
+                                <th class="p-3 text-right">Scrutiny Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationTableBody" class="divide-y divide-slate-200">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Selected Application Detailed Dossier Inspector Modal/Card -->
+            <div id="dossierInspector" class="hidden bg-white rounded-xl border-2 border-govBlue shadow-lg p-6 space-y-6">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 2: SHIFT-LEFT PRE-SUBMISSION AUDIT SIMULATOR                          -->
+        <!-- ========================================================================= -->
+        <section id="tab-simulator" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-govNavy to-govBlue text-white p-6 rounded-2xl shadow-sm">
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-1.5 bg-govSaffron text-slate-900 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                        <i data-lucide="zap" class="w-3.5 h-3.5"></i> Shift-Left Institutional Enablement
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold">Pre-Submission Audit Simulator (Sandbox Mode)</h2>
+                    <p class="text-sm text-slate-200 mt-1">
+                        Test your college application against official AICTE Approval Process Handbook (APH 2024–27) rules 
+                        <strong>before paying the non-refundable Technical Education Regulatory (TER) fee</strong>. 
+                        100% private diagnostic sandbox. Zero penalty.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left: Interactive Form (5 cols) -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i data-lucide="sliders" class="w-4 h-4 text-govSaffron"></i> Application Parameters
+                        </h3>
+                        <!-- Presets Dropdown/Buttons -->
+                        <div class="text-[11px] flex gap-1">
+                            <button onclick="loadPreset('compliant')" class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-semibold hover:bg-emerald-200">Preset: Clean</button>
+                            <button onclick="loadPreset('deficient')" class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded font-semibold hover:bg-amber-200">Preset: Deficit</button>
+                        </div>
+                    </div>
+
+                    <form id="simulatorForm" onsubmit="event.preventDefault(); runSimulator();" class="space-y-3.5 text-xs">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Technical Program</label>
+                            <select id="sim_program" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 focus:ring-2 focus:ring-govBlue">
+                                <option value="ENGINEERING_UG">UG Engineering & Technology (Norm: 1:20)</option>
+                                <option value="MANAGEMENT_PG">Management / MBA / PGDM (Norm: 1:25)</option>
+                                <option value="DIPLOMA_ENGG">Diploma Engineering (Norm: 1:25)</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Approved Intake (All Years)</label>
+                                <input type="number" id="sim_intake" value="480" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold text-slate-900">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Verified Faculty Count</label>
+                                <input type="number" id="sim_faculty" value="21" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold text-slate-900">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Occupancy Cert (OC) Type</label>
+                                <select id="sim_oc_type" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50">
+                                    <option value="PROVISIONAL">Provisional / Temporary OC</option>
+                                    <option value="PERMANENT">Permanent / Completion OC</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Provisional Years Used</label>
+                                <input type="number" id="sim_oc_years" value="1" min="0" max="4" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50">
+                                <span class="text-[10px] text-slate-400">APH Clause 7.3: Max 2 yrs</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Fire NOC Expiry Date</label>
+                                <input type="date" id="sim_fire_date" value="2024-05-15" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50">
+                                <span class="text-[10px] text-slate-400">Must cover Aug 2024 start</span>
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Campus Location Zone</label>
+                                <select id="sim_location" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50">
+                                    <option value="URBAN">Urban Area (Min 2.5 Acres)</option>
+                                    <option value="METRO">Mega/Metro (Min 1.5 Acres)</option>
+                                    <option value="RURAL">Rural Area (Min 4.0 Acres)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Declared Contiguous Land (Acres)</label>
+                            <input type="number" step="0.1" id="sim_land" value="2.8" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold">
+                        </div>
+
+                        <button type="submit" class="w-full bg-govNavy hover:bg-govBlue text-white font-bold py-2.5 px-4 rounded-lg shadow-sm transition flex items-center justify-center gap-2">
+                            <i data-lucide="play" class="w-4 h-4 text-govSaffron fill-govSaffron"></i>
+                            Run Pre-Submission Audit (Instant Diagnostic)
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right: Interactive Diagnostic Scorecard (7 cols) -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between" id="simulatorOutput">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 3: NATIONAL FACULTY INTEGRITY GRAPH (GHOST FACULTY RADAR)             -->
+        <!-- ========================================================================= -->
+        <section id="tab-graph" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-200">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-lg font-bold text-slate-900">National Faculty Integrity Graph (FIG)</h2>
+                            <span class="bg-rose-100 text-rose-800 text-xs font-bold px-2 py-0.5 rounded-full border border-rose-300">Ghost Faculty Radar</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            Cross-campus temporal bipartite network detecting concurrent multi-college employment rings. Modeled after the 2024 Tamil Nadu DVAC vigilance case.
+                        </p>
+                    </div>
+                    <div class="bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 text-xs flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                        <span class="font-medium">DPDP Act 2023 Compliant: Salted SHA-256 tokens (Zero raw Aadhaar)</span>
+                    </div>
+                </div>
+
+                <!-- Detected Syndicate Alert Box -->
+                <div class="mt-4 p-4 bg-rose-50 border border-rose-200 rounded-xl space-y-3">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-2 text-rose-900 font-bold text-sm">
+                            <i data-lucide="alert-octagon" class="w-5 h-5 text-rose-600"></i>
+                            Active Inter-Institutional Collusion Syndicate Detected (#SYN-2024-81)
+                        </div>
+                        <span class="text-xs font-bold text-rose-700 bg-rose-200/60 px-2 py-0.5 rounded">High Regulatory Impact</span>
+                    </div>
+                    <p class="text-xs text-rose-800">
+                        The Faculty Integrity Graph has uncovered <strong>2 senior faculty members</strong> simultaneously registered as full-time regular teachers in 
+                        <strong>Greenfield Institute of Technology (INST_101)</strong> and <strong>Vidya Polytechnic & Engineering College (INST_202)</strong>.
+                    </p>
+
+                    <!-- Collision Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                        <div class="bg-white p-3 rounded-lg border border-rose-300 shadow-xs space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 text-xs">Dr. R. K. S. (Professor & HOD)</span>
+                                <span class="text-[10px] font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">PAN: 8154c371...</span>
+                            </div>
+                            <div class="text-[11px] text-slate-600 space-y-1">
+                                <div class="flex items-center gap-1 text-emerald-700 font-medium">
+                                    <i data-lucide="building" class="w-3.5 h-3.5"></i> Greenfield Inst. of Tech (Active since Jun 2022)
+                                </div>
+                                <div class="flex items-center gap-1 text-rose-700 font-medium">
+                                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> Vidya Polytechnic (Active since Jan 2023)
+                                </div>
+                            </div>
+                            <div class="text-[10px] text-rose-600 font-semibold pt-1 border-t border-slate-100">
+                                ⚠️ FSR Voidance: Removed from faculty headcount for both institutions.
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-3 rounded-lg border border-rose-300 shadow-xs space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-900 text-xs">Dr. A. V. (Associate Professor)</span>
+                                <span class="text-[10px] font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">PAN: 0af547d2...</span>
+                            </div>
+                            <div class="text-[11px] text-slate-600 space-y-1">
+                                <div class="flex items-center gap-1 text-emerald-700 font-medium">
+                                    <i data-lucide="building" class="w-3.5 h-3.5"></i> Greenfield Inst. of Tech (Active since Aug 2021)
+                                </div>
+                                <div class="flex items-center gap-1 text-rose-700 font-medium">
+                                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> Vidya Polytechnic (Active since Aug 2023)
+                                </div>
+                            </div>
+                            <div class="text-[10px] text-rose-600 font-semibold pt-1 border-t border-slate-100">
+                                ⚠️ FSR Voidance: Removed from faculty headcount for both institutions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graph Network Representation -->
+                <div class="mt-6 border border-slate-200 rounded-xl p-6 bg-slate-50/50 flex flex-col items-center justify-center text-center">
+                    <div class="max-w-xl space-y-3">
+                        <i data-lucide="network" class="w-12 h-12 text-govBlue mx-auto"></i>
+                        <h4 class="font-bold text-slate-800 text-sm">Cross-Campus Graph Topology</h4>
+                        <p class="text-xs text-slate-500">
+                            The National Graph tracks over 120,000 technical faculty positions across India, cross-referencing EPF/ESIC return tokens and previous AICTE EoA records to prevent rotation of ghost faculty before inspection visits.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 4: AFFIDAVIT TRIANGULATION & DIGITAL FORENSICS                        -->
+        <!-- ========================================================================= -->
+        <section id="tab-triangulation" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="microscope" class="w-5 h-5 text-govSaffron"></i>
+                        Affidavit-vs-Evidence Triangulation & Digital Tamper Forensics
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">
+                        Deep multi-layer scrutiny comparing sworn declarations on ₹100 stamp-paper affidavits against municipal certificates, CAD floor plans, and digital signatures.
+                    </p>
+                </div>
+
+                <!-- Case Study: Royal Institute -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-800">Case Audit: Royal Institute of Advanced Studies (ID: AICTE-1-499102)</span>
+                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-2 py-0.5 rounded border border-rose-300">3 Contradictions Detected</span>
+                    </div>
+
+                    <!-- Side-by-side Triangulation Table -->
+                    <div class="p-4 overflow-x-auto">
+                        <table class="w-full text-left text-xs border border-slate-200">
+                            <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-2.5 border-r border-slate-200">Regulatory Field</th>
+                                    <th class="p-2.5 border-r border-slate-200 bg-blue-50/50 text-blue-900">Sworn Statement in Notarized Affidavit-2</th>
+                                    <th class="p-2.5 border-r border-slate-200 bg-amber-50/50 text-amber-900">Ground Evidence (Attached Certificate)</th>
+                                    <th class="p-2.5 text-rose-900 bg-rose-50/50">Statutory & Legal Implication</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-2.5 font-bold border-r border-slate-200">Occupancy Certificate (OC) Nature</td>
+                                    <td class="p-2.5 border-r border-slate-200">"The institution has obtained Permanent Occupancy Certificate on 14/03/2019"</td>
+                                    <td class="p-2.5 border-r border-slate-200 text-amber-800 font-medium">Municipal Authority document is strictly "Provisional / Temporary OC valid for 1 year"</td>
+                                    <td class="p-2.5 text-rose-700 font-semibold">False declaration under Section 199/200 IPC / Bharatiya Nyaya Sanhita.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold border-r border-slate-200">Campus Land Title (Survey No.)</td>
+                                    <td class="p-2.5 border-r border-slate-200">Declared title on Survey No: Plot No. 42/A</td>
+                                    <td class="p-2.5 border-r border-slate-200 text-amber-800 font-medium">Attached Registered Sale Deed specifies Plot No. 42/B (Unregistered Annex)</td>
+                                    <td class="p-2.5 text-rose-700 font-semibold">Premises title unverified; potential illegal campus expansion.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold border-r border-slate-200">Total Built-Up Area</td>
+                                    <td class="p-2.5 border-r border-slate-200">Sworn built-up area: 16,500.00 sq.m.</td>
+                                    <td class="p-2.5 border-r border-slate-200 text-amber-800 font-medium">Certified architectural floor plan totals only: 11,200.00 sq.m. (32% inflation)</td>
+                                    <td class="p-2.5 text-rose-700 font-semibold">Failure to satisfy mandatory instructional carpet area per APH.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Digital Forensic View (Interactive ELA Visualizer) -->
+                    <div class="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                                <i data-lucide="scan" class="w-4 h-4 text-govBlue"></i>
+                                Digital Document Forensic Heatmap (Fire NOC Expiry Date Alteration)
+                            </h4>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[11px] text-slate-500">View Mode:</span>
+                                <button onclick="toggleElaView(false)" id="btn-view-normal" class="px-2 py-0.5 bg-govBlue text-white rounded text-[11px] font-bold">Standard PDF Scan</button>
+                                <button onclick="toggleElaView(true)" id="btn-view-ela" class="px-2 py-0.5 bg-slate-200 text-slate-700 rounded text-[11px] font-bold hover:bg-slate-300">Error Level Analysis (ELA)</button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas/Image Box -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Left: Certificate Preview -->
+                            <div class="relative bg-white border border-slate-300 rounded-lg p-4 h-52 flex flex-col justify-between overflow-hidden shadow-inner">
+                                <div id="certificateContent" class="space-y-2">
+                                    <div class="text-center font-serif text-slate-800 border-b pb-1">
+                                        <div class="text-[10px] tracking-widest text-slate-500 uppercase">Government of Maharashtra</div>
+                                        <div class="text-xs font-bold">DEPARTMENT OF FIRE & EMERGENCY SERVICES</div>
+                                        <div class="text-[9px] text-slate-400">NO OBJECTION CERTIFICATE FOR OCCUPATION</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-700 leading-relaxed">
+                                        This is to certify that Royal Institute of Advanced Studies has complied with the fire protection arrangements.
+                                    </div>
+                                    <div class="bg-amber-50 p-2 rounded border border-amber-200 text-[11px] font-mono flex items-center justify-between">
+                                        <span>Valid Till:</span>
+                                        <span class="font-bold text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded border border-rose-300">30-JUNE-2027</span>
+                                    </div>
+                                </div>
+
+                                <!-- Heatmap Overlay -->
+                                <div id="elaOverlay" class="hidden absolute inset-0 ela-heatmap p-4 text-white flex flex-col justify-between">
+                                    <div class="text-[10px] font-mono bg-black/60 px-2 py-1 rounded w-fit border border-white/20">
+                                        ELA Compression Residual Heatmap
+                                    </div>
+                                    <div class="border-2 border-yellow-300 bg-red-600/60 p-2 rounded text-center shadow-lg animate-pulse">
+                                        <div class="text-xs font-bold text-yellow-200">TAMPER ANOMALY DETECTED</div>
+                                        <div class="text-[10px] text-white">Date region exhibits 4.82x higher compression variance than paper background. (Original year 2021 altered to 2027)</div>
+                                    </div>
+                                    <div class="text-[9px] font-mono text-slate-300">Bounding Box: [X: 420, Y: 680, W: 140, H: 45]</div>
+                                </div>
+
+                                <div class="text-[9px] text-slate-400 text-right">Certificate Ref: NOC/PUN/2021/8492</div>
+                            </div>
+
+                            <!-- Right: Forensic Explanation -->
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 text-xs space-y-2.5">
+                                <div class="font-bold text-slate-800 text-xs border-b pb-1">Forensic Findings Summary</div>
+                                <div class="flex items-start gap-2 text-rose-700">
+                                    <i data-lucide="x-circle" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                    <span><strong>PAdES Digital Signature:</strong> PDF incremental revision tree proves visual text streams were injected <em>AFTER</em> the DSC was sealed.</span>
+                                </div>
+                                <div class="flex items-start gap-2 text-rose-700">
+                                    <i data-lucide="x-circle" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                    <span><strong>Error Level Analysis (ELA):</strong> JPEG resaving artifacts indicate Photoshop cut-and-paste tampering over the expiration date numeral.</span>
+                                </div>
+                                <div class="flex items-start gap-2 text-purple-700">
+                                    <i data-lucide="copy" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                                    <span><strong>Perceptual Hash Deduplication:</strong> Seal impression matches template vector of College #104 with 99.4% perceptual match.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 5: 6-STATE VERIFICATION & MERKLE AUDIT LEDGER                         -->
+        <!-- ========================================================================= -->
+        <section id="tab-audit" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <!-- 6-State FSM Explanation -->
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="git-branch" class="w-5 h-5 text-govBlue"></i>
+                        6-State Issuing Authority Verification Machine & Merkle Audit Trail
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">
+                        Mandated finite state transitions ensuring transparent authority reconciliation and cryptographic auditability admissible under the Indian Evidence Act.
+                    </p>
+                </div>
+
+                <!-- 6 States Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
+                    <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-900">
+                        <div class="font-bold">1. VERIFIED</div>
+                        <div class="text-[10px] text-emerald-700 mt-0.5">Confirmed via DigiLocker / API Setu / CCA DSC.</div>
+                    </div>
+                    <div class="p-3 bg-rose-50 border border-rose-200 rounded-lg text-rose-900">
+                        <div class="font-bold">2. MISMATCH</div>
+                        <div class="text-[10px] text-rose-700 mt-0.5">Authority record exists but fields differ.</div>
+                    </div>
+                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-amber-900">
+                        <div class="font-bold">3. EXPIRED</div>
+                        <div class="text-[10px] text-amber-700 mt-0.5">Authentic doc, but validity lapsed.</div>
+                    </div>
+                    <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-900">
+                        <div class="font-bold">4. PENDING</div>
+                        <div class="text-[10px] text-blue-700 mt-0.5">In async queue awaiting authority callback.</div>
+                    </div>
+                    <div class="p-3 bg-slate-100 border border-slate-300 rounded-lg text-slate-800">
+                        <div class="font-bold">5. UNAVAILABLE</div>
+                        <div class="text-[10px] text-slate-600 mt-0.5">Target portal offline (Max 3 retries).</div>
+                    </div>
+                    <div class="p-3 bg-purple-50 border border-purple-200 rounded-lg text-purple-900">
+                        <div class="font-bold">6. MANUAL REVIEW</div>
+                        <div class="text-[10px] text-purple-700 mt-0.5">Non-digital authority or ELA anomaly.</div>
+                    </div>
+                </div>
+
+                <!-- Live Merkle Hash-Chained Audit Ledger -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="lock" class="w-4 h-4 text-govNavy"></i>
+                            <span class="text-xs font-bold text-slate-800">Cryptographic Merkle Audit Trail (Live Blocks)</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-slate-500">SHA-256 Hash Chained Ledger</span>
+                    </div>
+
+                    <div class="divide-y divide-slate-200 text-xs font-mono" id="auditTrailList">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-govNavy text-white py-6 border-t-2 border-govSaffron mt-auto text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-4">
+            <div class="space-y-1">
+                <div class="font-bold text-govSaffron">All India Council for Technical Education (AICTE)</div>
+                <div class="text-slate-400">Regulation Bureau • Ministry of Education, Government of India</div>
+            </div>
+            <div class="text-right text-slate-400">
+                <div>An Initiative for <strong>Government of India (Digital Governance)</strong></div>
+                <div class="text-[11px] text-slate-500">Security & DPDP 2023 Compliant • Non-Adverse AI Decision Support</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        // Sample Applications Data
+        const applications = [
+            {
+                id: "AICTE-1-100234",
+                name: "Apex Institute of Technology, Pune",
+                category: "Extension of Approval (EoA)",
+                program: "UG Engineering (480 Intake)",
+                facultyVerified: 26,
+                facultyRequired: 24,
+                rtiScore: 96.5,
+                track: "GREEN",
+                status: "VERIFIED",
+                ocType: "PERMANENT",
+                fireValidTill: "2025-06-30",
+                anomalies: "None. All records match Maharashtra Fire Portal & AICTE Master.",
+                recommendation: "Fast-Track Auto-EoA Recommended.",
+                severity: "CLEAN"
+            },
+            {
+                id: "AICTE-1-200541",
+                name: "Sunrise Engineering College, Bhopal",
+                category: "Extension of Approval (EoA)",
+                program: "UG Engineering (480 Intake)",
+                facultyVerified: 21,
+                facultyRequired: 24,
+                rtiScore: 68.0,
+                track: "AMBER",
+                status: "EXPIRED",
+                ocType: "PROVISIONAL (Year 1)",
+                fireValidTill: "2024-05-15",
+                anomalies: "FSR Deficit (1:22.8 vs 1:20 norm); Fire NOC expired on 15-May-2024.",
+                recommendation: "Issue Structured Deficiency Notice (10-Day Cure Window).",
+                severity: "DEFICIENT"
+            },
+            {
+                id: "INST_202",
+                name: "Vidya Polytechnic & Engineering College",
+                category: "Regulatory Scrutiny Audit",
+                program: "Diploma & UG Engg (600 Intake)",
+                facultyVerified: 19,
+                facultyRequired: 30,
+                rtiScore: 34.0,
+                track: "RED",
+                status: "MISMATCH_DETECTED",
+                ocType: "PROVISIONAL (Year 3 - Exceeded)",
+                fireValidTill: "2024-09-30",
+                anomalies: "2 Ghost Faculty detected simultaneously active in Greenfield Inst (INST_101).",
+                recommendation: "Revoke Zero-Deficiency; Mandatory Surprise EVC Inspection.",
+                severity: "FRAUD"
+            },
+            {
+                id: "AICTE-1-499102",
+                name: "Royal Institute of Advanced Studies",
+                category: "Increase in Intake (+120 Seats)",
+                program: "UG Engineering & PGDM",
+                facultyVerified: 18,
+                facultyRequired: 28,
+                rtiScore: 28.5,
+                track: "RED",
+                status: "MANUAL_REVIEW_REQUIRED",
+                ocType: "CONTRADICTION DETECTED",
+                fireValidTill: "2027 (Tampered)",
+                anomalies: "Affidavit Perjury (Area 32% inflated, OC provisional); ELA Tamper on Fire NOC.",
+                recommendation: "Issue Formal Show Cause; Forward Dossier to AICTE Legal Cell.",
+                severity: "PERJURY"
+            }
+        ];
+
+        // Audit Ledger State
+        let auditLedger = [
+            {
+                index: 1,
+                blockHash: "09cb4179412d68894a0be0ef428192a01948201a0bc192849102819201948201",
+                prevHash: "0000000000000000000000000000000000000000000000000000000000000000",
+                actor: "DIGILOCKER_GATEWAY",
+                action: "CONFIRM_VERIFICATION",
+                appId: "AICTE-1-100234",
+                time: "2024-08-14 10:24:18"
+            },
+            {
+                index: 2,
+                blockHash: "4810294820104810294820104810294820104810294820104810294820104810",
+                prevHash: "09cb4179412d68894a0be0ef428192a01948201a0bc192849102819201948201",
+                actor: "FACULTY_GRAPH_ENGINE",
+                action: "FLAG_GHOST_COLLISION",
+                appId: "INST_202",
+                time: "2024-08-14 11:05:42"
+            },
+            {
+                index: 3,
+                blockHash: "8a102b4c819201a4819201849102819201948201048102948201048102948201",
+                prevHash: "4810294820104810294820104810294820104810294820104810294820104810",
+                actor: "FORENSIC_ENGINE",
+                action: "FLAG_ELA_ALTERATION",
+                appId: "AICTE-1-499102",
+                time: "2024-08-14 11:45:10"
+            }
+        ];
+
+        // Initialize UI
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            renderApplicationQueue(applications);
+            runSimulator(); // Initial simulator render
+            renderAuditLedger();
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll("main > section").forEach(sec => sec.classList.add("hidden"));
+            document.getElementById(tabId).classList.remove("hidden");
+
+            document.querySelectorAll(".nav-btn").forEach(btn => {
+                btn.classList.remove("bg-govSaffron", "text-slate-900", "font-bold", "shadow");
+                btn.classList.add("text-slate-200");
+            });
+
+            const activeBtn = document.getElementById("btn-" + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove("text-slate-200");
+                activeBtn.classList.add("bg-govSaffron", "text-slate-900", "font-bold", "shadow");
+            }
+            lucide.createIcons();
+        }
+
+        // Render Application Queue Table
+        function renderApplicationQueue(list) {
+            const tbody = document.getElementById("applicationTableBody");
+            tbody.innerHTML = "";
+
+            list.forEach(app => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition cursor-pointer";
+                tr.onclick = () => openDossierInspector(app.id);
+
+                let trackBadge = "";
+                if (app.track === "GREEN") {
+                    trackBadge = `<span class="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-full text-xs border border-emerald-300 flex items-center gap-1 w-fit"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Green Track</span>`;
+                } else if (app.track === "AMBER") {
+                    trackBadge = `<span class="bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full text-xs border border-amber-300 flex items-center gap-1 w-fit"><span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span> Amber Track</span>`;
+                } else {
+                    trackBadge = `<span class="bg-rose-100 text-rose-800 font-bold px-2.5 py-1 rounded-full text-xs border border-rose-300 flex items-center gap-1 w-fit"><span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span> Red Track (EVC)</span>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="p-3">
+                        <div class="font-bold text-slate-900">${app.name}</div>
+                        <div class="text-[11px] font-mono text-slate-500">${app.id} • ${app.category}</div>
+                    </td>
+                    <td class="p-3">
+                        <div class="text-slate-800 font-medium">${app.program}</div>
+                        <div class="text-[11px] text-slate-500">Verified Faculty: ${app.facultyVerified} / ${app.facultyRequired} req.</div>
+                    </td>
+                    <td class="p-3">
+                        <div class="text-base font-bold ${app.rtiScore >= 85 ? 'text-emerald-700' : (app.rtiScore >= 60 ? 'text-amber-700' : 'text-rose-700')}">
+                            ${app.rtiScore.toFixed(1)}/100
+                        </div>
+                    </td>
+                    <td class="p-3">
+                        ${trackBadge}
+                        <div class="text-[11px] text-slate-500 mt-1">${app.recommendation}</div>
+                    </td>
+                    <td class="p-3 max-w-xs">
+                        <div class="text-xs text-slate-700 line-clamp-2">${app.anomalies}</div>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button class="bg-govBlue hover:bg-govLightBlue text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-xs flex items-center gap-1 ml-auto">
+                            Inspect <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            lucide.createIcons();
+        }
+
+        // Filter Scrutiny Queue
+        function filterQueue(track) {
+            document.querySelectorAll(".queue-filter").forEach(b => b.classList.remove("active", "bg-white", "text-slate-900", "font-bold", "shadow-xs"));
+            event.target.classList.add("active", "bg-white", "text-slate-900", "font-bold", "shadow-xs");
+
+            if (track === "ALL") {
+                renderApplicationQueue(applications);
+            } else {
+                renderApplicationQueue(applications.filter(a => a.track === track));
+            }
+        }
+
+        // Open Dossier Modal
+        function openDossierInspector(appId) {
+            const app = applications.find(a => a.id === appId);
+            if (!app) return;
+
+            const container = document.getElementById("dossierInspector");
+            container.classList.remove("hidden");
+
+            container.innerHTML = `
+                <div class="flex items-start justify-between border-b pb-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-lg font-bold text-slate-900">${app.name}</h3>
+                            <span class="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">${app.id}</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-0.5">${app.category} • Academic Year 2024–2025</p>
+                    </div>
+                    <button onclick="document.getElementById('dossierInspector').classList.add('hidden')" class="p-1 hover:bg-slate-100 rounded text-slate-400 hover:text-slate-700">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Column 1: Score & Track -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <div class="text-xs font-semibold text-slate-500 uppercase">Regulatory Trust Index (RTI)</div>
+                        <div class="text-3xl font-extrabold ${app.rtiScore >= 85 ? 'text-emerald-600' : (app.rtiScore >= 60 ? 'text-amber-600' : 'text-rose-600')}">
+                            ${app.rtiScore}/100
+                        </div>
+                        <div class="text-xs font-semibold text-slate-800">Recommendation: ${app.recommendation}</div>
+                        <div class="text-[11px] text-slate-500 pt-2 border-t">
+                            Weighted factors: Authenticity (35%), Consistency (25%), Faculty (25%), Spatial (15%).
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Document Statuses -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+                        <div class="font-semibold text-slate-500 uppercase text-[11px]">Key Document Checks</div>
+                        <div class="flex justify-between items-center py-1 border-b">
+                            <span>Occupancy Cert:</span>
+                            <span class="font-bold ${app.ocType.includes('PERMANENT') ? 'text-emerald-700' : 'text-amber-700'}">${app.ocType}</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1 border-b">
+                            <span>Fire NOC Valid Till:</span>
+                            <span class="font-bold ${app.fireValidTill.includes('2025') ? 'text-emerald-700' : 'text-rose-700'}">${app.fireValidTill}</span>
+                        </div>
+                        <div class="flex justify-between items-center py-1">
+                            <span>Faculty Headcount:</span>
+                            <span class="font-bold ${app.facultyVerified >= app.facultyRequired ? 'text-emerald-700' : 'text-rose-700'}">${app.facultyVerified} of ${app.facultyRequired}</span>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Officer Decision Actions -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+                        <div class="text-xs font-semibold text-slate-800 uppercase text-[11px]">Officer Statutory Action</div>
+                        <div class="space-y-1.5">
+                            <button onclick="recordOfficerDecision('${app.id}', 'APPROVE_EOA')" class="w-full text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white py-1.5 px-3 rounded shadow-xs flex items-center justify-center gap-1.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5"></i> Recommend Fast-Track EoA
+                            </button>
+                            <button onclick="recordOfficerDecision('${app.id}', 'ISSUE_DEFICIENCY')" class="w-full text-xs font-bold bg-amber-500 hover:bg-amber-600 text-white py-1.5 px-3 rounded shadow-xs flex items-center justify-center gap-1.5">
+                                <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> Issue 10-Day Deficiency Notice
+                            </button>
+                            <button onclick="recordOfficerDecision('${app.id}', 'DISPATCH_EVC')" class="w-full text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white py-1.5 px-3 rounded shadow-xs flex items-center justify-center gap-1.5">
+                                <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Dispatch Surprise EVC Committee
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.scrollIntoView({ behavior: 'smooth' });
+            lucide.createIcons();
+        }
+
+        // Officer Decision Action with Audit Append
+        function recordOfficerDecision(appId, decision) {
+            const decisionText = decision === 'APPROVE_EOA' ? 'Recommend Fast-Track EoA' :
+                                (decision === 'ISSUE_DEFICIENCY' ? 'Issue 10-Day Deficiency Notice' : 'Dispatch Surprise EVC Committee');
+
+            alert(`Statutory action recorded: "${decisionText}" for application ${appId}.\nA new cryptographic block has been added to the Merkle Audit Trail.`);
+
+            // Add block to audit trail
+            const newIndex = auditLedger.length + 1;
+            const prev = auditLedger[auditLedger.length - 1].blockHash;
+            const newHash = Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join('');
+
+            auditLedger.push({
+                index: newIndex,
+                blockHash: newHash,
+                prevHash: prev,
+                actor: "OFFICER_ID_8492 (Regulation Bureau)",
+                action: decision,
+                appId: appId,
+                time: new Date().toISOString().replace('T', ' ').slice(0, 19)
+            });
+
+            renderAuditLedger();
+            document.getElementById('dossierInspector').classList.add('hidden');
+        }
+
+        // Render Merkle Audit Ledger
+        function renderAuditLedger() {
+            const container = document.getElementById("auditTrailList");
+            container.innerHTML = "";
+
+            auditLedger.slice().reverse().forEach(entry => {
+                const div = document.createElement("div");
+                div.className = "p-3 bg-white hover:bg-slate-50 transition space-y-1";
+                div.innerHTML = `
+                    <div class="flex items-center justify-between text-slate-800">
+                        <span class="font-bold text-govNavy">BLOCK #${entry.index} • [${entry.action}]</span>
+                        <span class="text-slate-400 text-[10px]">${entry.time}</span>
+                    </div>
+                    <div class="text-[11px] text-slate-600">
+                        Target: <strong class="text-slate-800">${entry.appId}</strong> | Actor: <span class="text-govBlue font-semibold">${entry.actor}</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 truncate">
+                        Prev: ${entry.prevHash.slice(0, 24)}... | Current Hash: <strong class="text-emerald-700">${entry.blockHash.slice(0, 24)}...</strong>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Shift-Left Simulator Execution
+        function runSimulator() {
+            const intake = parseInt(document.getElementById("sim_intake").value) || 0;
+            const faculty = parseInt(document.getElementById("sim_faculty").value) || 0;
+            const ocType = document.getElementById("sim_oc_type").value;
+            const ocYears = parseInt(document.getElementById("sim_oc_years").value) || 0;
+            const fireDate = document.getElementById("sim_fire_date").value;
+            const location = document.getElementById("sim_location").value;
+            const land = parseFloat(document.getElementById("sim_land").value) || 0;
+
+            const minLand = location === 'URBAN' ? 2.5 : (location === 'METRO' ? 1.5 : 4.0);
+            const reqFaculty = Math.ceil(intake / 20.0);
+            const isFireExpired = fireDate < '2024-08-01';
+            const isOcExceeded = ocType === 'PROVISIONAL' && ocYears >= 2;
+            const isLandDeficit = land < minLand;
+            const isFacultyDeficit = faculty < reqFaculty;
+
+            let criticals = [];
+            let warnings = [];
+            let compliant = [];
+
+            if (isFacultyDeficit) {
+                criticals.push({
+                    title: `Faculty Deficit (1:${(intake / Math.max(1, faculty)).toFixed(1)} vs 1:20 Norm)`,
+                    detail: `Intake of ${intake} requires at least ${reqFaculty} faculty. Current verified is ${faculty} (Deficit: ${reqFaculty - faculty}).`,
+                    action: `Add ${reqFaculty - faculty} more verified faculty before submitting.`
+                });
+            } else {
+                compliant.push(`FSR Ratio: 1:${(intake / Math.max(1, faculty)).toFixed(1)} satisfies 1:20 norm.`);
+            }
+
+            if (isFireExpired) {
+                criticals.push({
+                    title: `Fire Safety NOC Expired on ${fireDate}`,
+                    detail: `Fire NOC must be valid on/after academic session start (01-Aug-2024).`,
+                    action: `Upload renewed Fire Safety Certificate.`
+                });
+            } else {
+                compliant.push(`Fire NOC valid until ${fireDate}.`);
+            }
+
+            if (isOcExceeded) {
+                criticals.push({
+                    title: `Provisional OC Limit Exceeded (Used ${ocYears} Years)`,
+                    detail: `Under APH Clause 7.3, provisional certificates are limited to 2 consecutive years.`,
+                    action: `Permanent Occupancy / Completion Certificate is now mandatory.`
+                });
+            } else if (ocType === 'PROVISIONAL') {
+                warnings.push(`Provisional OC in use (Year ${ocYears + 1} of 2 permitted). Permanent OC mandatory next year.`);
+            } else {
+                compliant.push(`Permanent Occupancy Certificate verified.`);
+            }
+
+            if (isLandDeficit) {
+                criticals.push({
+                    title: `Land Acreage Deficit (${land} Acres vs ${minLand} Acres Norm)`,
+                    detail: `Declared area in ${location} zone falls below minimum contiguous requirement.`,
+                    action: `Attach registered documentation for required contiguous acreage.`
+                });
+            } else {
+                compliant.push(`Contiguous land acreage (${land} Acres) meets norm (${minLand} Acres).`);
+            }
+
+            // Calculate Score
+            let score = 100 - (criticals.length * 28) - (warnings.length * 8);
+            score = Math.max(20, Math.min(100, score));
+
+            const output = document.getElementById("simulatorOutput");
+            output.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 uppercase">Pre-Submission Readiness Score</span>
+                            <div class="text-3xl font-black ${score >= 85 ? 'text-emerald-600' : (score >= 60 ? 'text-amber-600' : 'text-rose-600')}">
+                                ${score}/100
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${score >= 85 ? 'bg-emerald-100 text-emerald-800' : (score >= 60 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800')}">
+                                ${score >= 85 ? 'Ready to Submit' : (score >= 60 ? 'Deficiencies Found' : 'Submission Blocked')}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Critical Blockers -->
+                    ${criticals.length > 0 ? `
+                        <div class="space-y-2">
+                            <div class="text-xs font-bold text-rose-800 flex items-center gap-1">
+                                <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600"></i> Critical Deficiencies (${criticals.length}) - Must Fix Before TER Fee Payment
+                            </div>
+                            <div class="space-y-2">
+                                ${criticals.map(c => `
+                                    <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-lg text-xs space-y-1">
+                                        <div class="font-bold text-rose-900">${c.title}</div>
+                                        <div class="text-rose-700">${c.detail}</div>
+                                        <div class="text-[11px] font-semibold text-rose-800 bg-rose-100/70 p-1.5 rounded flex items-center gap-1">
+                                            👉 Remedy: ${c.action}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- Compliant Checks -->
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-emerald-800 flex items-center gap-1">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Compliant Norms (${compliant.length})
+                        </div>
+                        <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside bg-emerald-50/50 p-2.5 rounded-lg border border-emerald-100">
+                            ${compliant.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                    <span class="text-slate-400">Pre-Audit Engine: APH 2024–27 Diagnostic Sandbox</span>
+                    <button class="px-4 py-2 bg-govSaffron hover:bg-amber-600 text-slate-900 font-bold rounded-lg shadow-xs flex items-center gap-1.5 ${criticals.length > 0 ? 'opacity-50 cursor-not-allowed' : ''}">
+                        Proceed to TER Payment <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // Preset Loader
+        function loadPreset(type) {
+            if (type === 'compliant') {
+                document.getElementById("sim_intake").value = 480;
+                document.getElementById("sim_faculty").value = 26;
+                document.getElementById("sim_oc_type").value = "PERMANENT";
+                document.getElementById("sim_oc_years").value = 0;
+                document.getElementById("sim_fire_date").value = "2025-06-30";
+                document.getElementById("sim_land").value = 3.2;
+            } else {
+                document.getElementById("sim_intake").value = 480;
+                document.getElementById("sim_faculty").value = 21;
+                document.getElementById("sim_oc_type").value = "PROVISIONAL";
+                document.getElementById("sim_oc_years").value = 1;
+                document.getElementById("sim_fire_date").value = "2024-05-15";
+                document.getElementById("sim_land").value = 2.8;
+            }
+            runSimulator();
+        }
+
+        // Toggle ELA View in Forensics
+        function toggleElaView(showEla) {
+            const overlay = document.getElementById("elaOverlay");
+            const btnNormal = document.getElementById("btn-view-normal");
+            const btnEla = document.getElementById("btn-view-ela");
+
+            if (showEla) {
+                overlay.classList.remove("hidden");
+                btnEla.classList.replace("bg-slate-200", "bg-govBlue");
+                btnEla.classList.replace("text-slate-700", "text-white");
+                btnNormal.classList.replace("bg-govBlue", "bg-slate-200");
+                btnNormal.classList.replace("text-white", "text-slate-700");
+            } else {
+                overlay.classList.add("hidden");
+                btnNormal.classList.replace("bg-slate-200", "bg-govBlue");
+                btnNormal.classList.replace("text-white", "text-slate-700");
+                btnEla.classList.replace("bg-govBlue", "bg-slate-200");
+                btnEla.classList.replace("text-white", "text-slate-700");
+            }
+        }
+    </script>
+</body>
+</html>
