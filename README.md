@@ -1,4 +1,4 @@
-# SATYA-SHIKSHA (सत्य-शिक्षा)
+# SAMPARK-SATYA
 ### AI-Powered Higher Education Application Validation, Document Authentication & Regulatory Scrutiny Platform
 
 An intelligent decision-support system designed for the **All India Council for Technical Education (AICTE), Ministry of Education, Government of India**. 
@@ -19,26 +19,6 @@ The platform automates the scrutiny of Extension of Approval (EoA), New Institut
 5. **"Shift-Left" Pre-Submission Simulator:** A zero-penalty diagnostic sandbox allowing colleges to test their applications and rectify deficiencies before paying non-refundable fees.
 6. **6-State Issuing Authority Verification:** Enforces the mandatory state model: `VERIFIED`, `MISMATCH_DETECTED`, `EXPIRED`, `VERIFICATION_PENDING`, `SOURCE_UNAVAILABLE`, and `MANUAL_REVIEW_REQUIRED`.
 7. **Merkle Hash-Chained Audit Ledger:** Immutably records every rule checked, authority response, and officer decision in a cryptographic SHA-256 block chain.
-
----
-
-## 🚀 Quick Start Guide
-
-### 1. Run the Web Dashboard & API Server
-No external dependencies (`pip` or `npm`) required. Runs on standard Python 3:
-
-```bash
-python3 server.py
-```
-Open your browser and navigate to:
-👉 **http://localhost:8000**
-
-### 2. Run the CLI Simulation Engine
-To execute the automated evaluation across all 4 synthetic institutional scenarios:
-
-```bash
-python3 prototype/demo_runner.py
-```
 
 ---
 
