@@ -304,7 +304,7 @@
                             <div class="text-[10px] text-slate-400 font-mono">Employee ID: AICTE-HQ-94021</div>
                             <p class="text-[11px] text-slate-500 mt-2 line-clamp-2">Scrutinize risk-stratified queues (Green/Amber/Red), examine ELA tampering heatmaps, and issue statutory sanction orders.</p>
                             <div class="mt-2 text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-1 rounded border border-emerald-200">
-                                🔑 Role Access: Scrutiny Board, FIG Graph, Triangulation, Audit Ledger & Sandbox
+                                🔑 Role Access: Scrutiny Board, FIG Graph, Triangulation & 6-State Audit Ledger
                             </div>
                         </div>
                         <button onclick="loginAsRole('OFFICER')" class="w-full bg-emerald-50 hover:bg-emerald-700 text-emerald-800 hover:text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-xs">
@@ -2151,7 +2151,7 @@
 
         // Role-Based Navigation Permissions Mapping
         // - COLLEGE: College Portal (E-Filing) & Pre-Audit Simulator only
-        // - OFFICER: Officer Scrutiny Board, FIG Graph, Affidavit Triangulation, 6-State Audit Ledger & Simulator
+        // - OFFICER: Officer Scrutiny Board, FIG Graph, Affidavit Triangulation & 6-State Audit Ledger
         // - EVC: EVC Inspection Board (Red-Track), Affidavit Triangulation & Audit Ledger
         const ROLE_PERMISSIONS = {
             COLLEGE: {
@@ -2161,7 +2161,7 @@
                 scrutinyTitle: 'Officer Scrutiny Board'
             },
             OFFICER: {
-                allowedTabs: ['tab-scrutiny', 'tab-graph', 'tab-triangulation', 'tab-audit', 'tab-simulator'],
+                allowedTabs: ['tab-scrutiny', 'tab-graph', 'tab-triangulation', 'tab-audit'],
                 defaultTab: 'tab-scrutiny',
                 roleLabel: 'Officer: Dr. S. Ramanathan (Bureau Chief)',
                 scrutinyTitle: 'Officer Scrutiny Board'
