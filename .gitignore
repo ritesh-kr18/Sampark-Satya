@@ -36,3 +36,6 @@ wheels/
 # Environment & Logs
 .env
 *.log
+
+# Private Presentation Scripts
+LIVE_DEMO_WALKTHROUGH_SCRIPT.md
