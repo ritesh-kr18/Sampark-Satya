@@ -674,34 +674,138 @@
                         <!-- Rendered dynamically by renderDynamicUploadSlots() -->
                     </div>
 
-                    <!-- Action Button -->
-                    <button onclick="executeDynamicPipeline()" id="btnStartPipeline" disabled class="w-full bg-slate-300 text-slate-600 font-bold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed">
-                        <i data-lucide="play-circle" class="w-5 h-5"></i>
-                        <span id="btnStartPipelineText">Select or Auto-Fill Files to Trigger Multi-Engine Scrutiny</span>
-                    </button>
+                    <!-- Checklist Guidance Note -->
+                    <div class="p-3 bg-blue-50/70 border border-blue-200 rounded-xl flex items-center justify-between text-xs text-slate-700">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4 text-govBlue shrink-0"></i>
+                            <span>All documents are encrypted with DPDP Act 2023 compliant tokenization before staging.</span>
+                        </div>
+                        <span id="stagedReadinessPill" class="font-bold text-[10px] bg-white px-2 py-0.5 rounded border border-blue-200 text-govBlue">0 Staged</span>
+                    </div>
                 </div>
 
-                <!-- Right: Real-Time Execution Console & Live Pipeline Walkthrough (5 cols) -->
-                <div class="lg:col-span-5 bg-slate-900 text-white p-6 rounded-2xl shadow-md flex flex-col justify-between space-y-4 font-mono">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-                        <div class="flex items-center gap-2">
-                            <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-300">Live AI Scrutiny Console</span>
+                <!-- Right: Institutional Submission & Cryptographic Transmission Desk (5 cols) -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <!-- Top Heading -->
+                    <div class="space-y-1 pb-3 border-b border-slate-100">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-black uppercase tracking-wider text-govNavy flex items-center gap-1.5">
+                                <i data-lucide="send" class="w-4 h-4 text-govSaffron"></i>
+                                <span>Institutional E-Filing Desk</span>
+                            </span>
+                            <span class="text-[10px] bg-blue-50 text-govBlue font-bold px-2 py-0.5 rounded border border-blue-200 font-mono">APH Cycle 2024–25</span>
                         </div>
-                        <span class="text-[10px] text-slate-400" id="consoleExecSpeed">Compute Latency: ~0.38s</span>
+                        <p class="text-[11px] text-slate-500">Stage required files, compute manifest checksum, and dispatch your statutory dossier to the AICTE Regulation Bureau.</p>
                     </div>
 
-                    <!-- Live Log Terminal Feed -->
-                    <div class="h-80 overflow-y-auto space-y-2 text-xs pr-1" id="liveConsoleFeed">
-                        <div class="text-slate-500">// Ready for evaluation. Select application category and click "Auto-Fill Category Samples" or browse files.</div>
-                    </div>
+                    <!-- Pending Submission Panel -->
+                    <div id="efilingPendingPanel" class="space-y-3.5">
+                        <!-- Institution Profile Card -->
+                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
+                            <div class="flex justify-between items-center text-slate-500 text-[11px]">
+                                <span>Applicant Institution:</span>
+                                <span class="font-mono font-bold text-govNavy">AICTE-1-499102</span>
+                            </div>
+                            <div class="font-bold text-slate-900 text-sm">Royal Institute of Advanced Studies</div>
+                            <div class="text-[11px] text-slate-600 flex items-center justify-between">
+                                <span>Application Track:</span>
+                                <strong id="summarySelectedCat" class="text-govBlue font-bold">Extension of Approval (EoA)</strong>
+                            </div>
+                        </div>
 
-                    <!-- Jump to Officer Dashboard Button (Revealed after execution) -->
-                    <div id="jumpToScrutinySection" class="hidden pt-3 border-t border-slate-800">
-                        <button onclick="jumpToScrutinyWithTarget('AICTE-1-499102')" class="w-full bg-govSaffron hover:bg-amber-500 text-slate-950 font-black py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg transition animate-bounce">
-                            <span>Open In Officer Scrutiny Board</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        <!-- Progress Bar -->
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-slate-700">Statutory Dossier Readiness:</span>
+                                <span id="summaryStagedCountText" class="font-black text-amber-700 font-mono">0 / 7 Documents Staged</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                                <div id="summaryProgressBar" class="bg-govSaffron h-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                            <div class="text-[10px] text-slate-400 flex justify-between">
+                                <span>Mandatory Compliance Check</span>
+                                <span id="summaryReadyBadge" class="text-slate-500 font-bold">Upload Files or Click Auto-Fill</span>
+                            </div>
+                        </div>
+
+                        <!-- Non-Repudiation Checksum -->
+                        <div class="p-3 bg-slate-900 text-white rounded-xl font-mono text-[11px] space-y-1">
+                            <div class="flex items-center justify-between text-slate-400 text-[10px]">
+                                <span>NON-REPUDIATION MANIFEST CHECKSUM</span>
+                                <span class="text-emerald-400">SHA-256</span>
+                            </div>
+                            <div id="manifestChecksumText" class="text-amber-300 truncate font-mono text-[10px]">
+                                000000000000000000000000000000000000000000000000...
+                            </div>
+                            <div class="text-[9.5px] text-slate-400">Cryptographically seals file hashes to establish legal non-repudiation.</div>
+                        </div>
+
+                        <!-- Legal Declaration Checkbox -->
+                        <label class="flex items-start gap-2 p-3 bg-amber-50/70 border border-amber-200/80 rounded-xl cursor-pointer text-xs">
+                            <input type="checkbox" id="checkLegalUndertaking" onchange="updateEfilingSubmitButton()" class="mt-0.5 rounded border-slate-300 text-govBlue focus:ring-govBlue cursor-pointer">
+                            <span class="text-slate-700 text-[11px] leading-relaxed select-none">
+                                I, Authorized Signatory, solemnly affirm that all uploaded statutory documents and declarations strictly comply with the <strong>AICTE Approval Process Handbook (APH 2024–2027)</strong>.
+                            </span>
+                        </label>
+
+                        <!-- Primary Submit Button -->
+                        <button onclick="submitCollegeApplication()" id="btnSubmitDossier" disabled class="w-full bg-slate-300 text-slate-600 font-extrabold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            <span id="btnSubmitDossierText">Stage Documents to Enable E-Filing</span>
                         </button>
+                    </div>
+
+                    <!-- Submitted State: Official E-Filing Acknowledgement Receipt (Hidden initially) -->
+                    <div id="efilingSuccessReceipt" class="hidden space-y-4">
+                        <div class="p-4 bg-emerald-50 border-2 border-emerald-500 rounded-xl space-y-3">
+                            <div class="flex items-center gap-2 text-emerald-800">
+                                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold shrink-0">
+                                    <i data-lucide="check" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-emerald-950">Statutory Dossier E-Filed & Dispatched!</h4>
+                                    <p class="text-[11px] text-emerald-700">Official AICTE E-Filing Submission Acknowledgement</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-3 rounded-lg border border-emerald-200 space-y-1.5 text-xs font-mono">
+                                <div class="flex justify-between py-0.5 border-b border-slate-100">
+                                    <span class="text-slate-500">Acknowledgement No:</span>
+                                    <strong class="text-govNavy font-bold">AICTE/ACK/2024/499102</strong>
+                                </div>
+                                <div class="flex justify-between py-0.5 border-b border-slate-100">
+                                    <span class="text-slate-500">Submission Timestamp:</span>
+                                    <span id="receiptTimestamp" class="text-slate-800 font-semibold">Current Session</span>
+                                </div>
+                                <div class="flex justify-between py-0.5 border-b border-slate-100">
+                                    <span class="text-slate-500">Destination:</span>
+                                    <span class="text-govBlue font-bold">AICTE Regulation Bureau Scrutiny Queue</span>
+                                </div>
+                                <div class="flex justify-between py-0.5">
+                                    <span class="text-slate-500">Current Status:</span>
+                                    <span class="bg-blue-100 text-blue-900 px-2 py-0.5 rounded font-black text-[10px]">DISPATCHED • AWAITING OFFICER MULTI-AGENT SCRUTINY</span>
+                                </div>
+                            </div>
+
+                            <div class="text-[11px] text-slate-600 leading-relaxed bg-white/80 p-2.5 rounded-lg border border-emerald-200">
+                                <strong class="text-slate-900">Workflow Note:</strong> The documents have been sealed and transferred to the AICTE Regulation Bureau. The AICTE Scrutiny Officer will now execute the <strong>Live Multi-Agent Autonomous Scrutiny Pipeline</strong> upon opening their board.
+                            </div>
+                        </div>
+
+                        <!-- Direct Step for Evaluation Walkthrough -->
+                        <div class="pt-1">
+                            <button onclick="switchToOfficerAndScrutinize('AICTE-1-499102')" class="w-full bg-govNavy hover:bg-govBlue text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 border-2 border-govSaffron animate-pulse cursor-pointer text-xs sm:text-sm">
+                                <i data-lucide="shield" class="w-4 h-4 text-govSaffron"></i>
+                                <span>Login as AICTE Officer to Perform Multi-Agent Scrutiny</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-govSaffron"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Footer Note -->
+                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                        <span>AICTE E-Governance Portal</span>
+                        <span class="text-emerald-700 font-bold">✓ Non-Repudiation Sealed</span>
                     </div>
                 </div>
             </div>
@@ -714,6 +818,66 @@
                 <div class="text-xs sm:text-sm text-slate-700">
                     <strong class="text-slate-900 font-semibold">Statutory Advisory Note:</strong> Under the AICTE Act 1987 and Principles of Natural Justice, AI outputs are 
                     <strong>decision-support indicators only</strong>. Statutory scrutiny, issuance of show-cause notices, and adverse regulatory actions remain exclusively with authorized AICTE officials.
+                </div>
+            </div>
+
+            <!-- AICTE Live Multi-Agent Autonomous Scrutiny Command Center -->
+            <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-lg border-2 border-govSaffron/70 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shrink-0">
+                            <i data-lucide="bot" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                                    <span>AICTE Autonomous Multi-Agent Regulatory Scrutiny Engine</span>
+                                </h3>
+                                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span>6 Specialized AI Agents Ready</span>
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-300">Live decision-support swarm: OCR entity extraction, JPEG ELA tamper detection, sworn affidavit perjury triangulation & bipartite faculty graph audit.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <button onclick="executeOfficerMultiAgentPipeline()" id="btnOfficerRunMultiAgent" class="bg-govSaffron hover:bg-amber-500 text-slate-950 font-black px-4 py-2.5 rounded-xl shadow-md transition flex items-center gap-2 text-xs cursor-pointer border border-amber-300 animate-pulse">
+                            <i data-lucide="play" class="w-4 h-4 fill-slate-950"></i>
+                            <span>Trigger Live Multi-Agent AI Scrutiny</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Staged Submission Status Bar -->
+                <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700/80 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-400">Incoming College Dossier:</span>
+                        <strong class="text-amber-300">Royal Institute of Advanced Studies [AICTE-1-499102]</strong>
+                        <span class="text-slate-400">• Extension of Approval (EoA 2024–25)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-400">Status:</span>
+                        <span id="officerDossierStatusBadge" class="bg-blue-500/20 text-blue-300 border border-blue-400/30 px-2 py-0.5 rounded font-bold text-[11px]">
+                            SUBMITTED BY COLLEGE • AWAITING OFFICER MULTI-AGENT SCRUTINY
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Live Multi-Agent Execution Console (Real-time Streaming Feed) -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+                        <span class="flex items-center gap-1.5 text-emerald-400 font-bold">
+                            <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+                            <span>Multi-Agent Swarm Real-Time Log Stream</span>
+                        </span>
+                        <span id="officerComputeSpeed">Engine: Parallel Multi-Worker Swarm (0.42s total compute)</span>
+                    </div>
+
+                    <div class="h-64 overflow-y-auto space-y-2 text-xs pr-1 font-mono bg-slate-950 p-4 rounded-xl border border-slate-800" id="officerLiveConsoleFeed">
+                        <div class="text-slate-500">// Dossier received from College E-Filing Portal. Click "Trigger Live Multi-Agent AI Scrutiny" above to execute the 6 regulatory agents in parallel.</div>
+                    </div>
                 </div>
             </div>
 
@@ -1791,6 +1955,11 @@
             lucide.createIcons();
         }
 
+        // =========================================================================
+        // COLLEGE E-FILING DISPATCH & OFFICER MULTI-AGENT SCRUTINY PIPELINE
+        // =========================================================================
+        let dossierSubmittedByCollege = false;
+
         function updatePipelineButtonState() {
             const catSpec = APH_CATEGORIES[currentAppCategory];
             if (!catSpec) return;
@@ -1798,70 +1967,146 @@
             const currentStaged = stagedCategoryFiles[currentAppCategory] || {};
             const uploadedCount = Object.keys(currentStaged).length;
             const totalRequired = catSpec.docs.length;
-            const btn = document.getElementById("btnStartPipeline");
+            const percentage = Math.round((uploadedCount / totalRequired) * 100);
 
+            // Update Progress Bar & Text
+            const countText = document.getElementById("summaryStagedCountText");
+            if (countText) countText.innerText = `${uploadedCount} / ${totalRequired} Documents Staged`;
+
+            const progressBar = document.getElementById("summaryProgressBar");
+            if (progressBar) progressBar.style.width = `${percentage}%`;
+
+            const readyBadge = document.getElementById("summaryReadyBadge");
+            if (readyBadge) {
+                if (uploadedCount >= totalRequired) {
+                    readyBadge.className = "text-emerald-700 font-bold";
+                    readyBadge.innerText = "✓ Dossier Complete (Ready to Submit)";
+                } else if (uploadedCount > 0) {
+                    readyBadge.className = "text-amber-700 font-bold";
+                    readyBadge.innerText = `${totalRequired - uploadedCount} Required Documents Remaining`;
+                } else {
+                    readyBadge.className = "text-slate-500 font-bold";
+                    readyBadge.innerText = "Upload Files or Click Auto-Fill";
+                }
+            }
+
+            const pill = document.getElementById("stagedReadinessPill");
+            if (pill) pill.innerText = `${uploadedCount}/${totalRequired} Staged`;
+
+            // Compute dynamic manifest hash
             if (uploadedCount > 0) {
+                const sampleHash = "9e8a71c08b" + (uploadedCount * 1849201948).toString(16) + "fa08192049102819028491";
+                const hashElem = document.getElementById("manifestChecksumText");
+                if (hashElem) hashElem.innerText = sampleHash.padEnd(64, '0');
+            }
+
+            updateEfilingSubmitButton();
+        }
+
+        function updateEfilingSubmitButton() {
+            const catSpec = APH_CATEGORIES[currentAppCategory];
+            if (!catSpec) return;
+
+            const currentStaged = stagedCategoryFiles[currentAppCategory] || {};
+            const uploadedCount = Object.keys(currentStaged).length;
+            const totalRequired = catSpec.docs.length;
+            const isLegalChecked = document.getElementById("checkLegalUndertaking")?.checked;
+            const btn = document.getElementById("btnSubmitDossier");
+            const btnText = document.getElementById("btnSubmitDossierText");
+
+            if (!btn || !btnText) return;
+
+            if (uploadedCount === 0) {
+                btn.disabled = true;
+                btn.className = "w-full bg-slate-300 text-slate-600 font-extrabold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed";
+                btnText.innerText = "Stage Documents to Enable E-Filing";
+            } else if (!isLegalChecked) {
+                btn.disabled = true;
+                btn.className = "w-full bg-amber-200 text-amber-900 font-extrabold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed";
+                btnText.innerText = "Please Check Legal Affirmation Checkbox";
+            } else {
                 btn.disabled = false;
                 btn.className = "w-full bg-govNavy hover:bg-govBlue text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer border-2 border-govSaffron animate-pulse";
-                btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5 text-govSaffron fill-govSaffron"></i><span>Trigger Multi-Engine AI Scrutiny (${uploadedCount}/${totalRequired} Files Staged)</span>`;
-            } else {
-                btn.disabled = true;
-                btn.className = "w-full bg-slate-300 text-slate-600 font-bold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed";
-                btn.innerHTML = `<i data-lucide="play-circle" class="w-5 h-5"></i><span>Select or Auto-Fill Files to Trigger Multi-Engine Scrutiny</span>`;
+                btnText.innerText = `Submit Application & Dispatch Dossier (${uploadedCount}/${totalRequired} Files)`;
             }
         }
 
-        async function executeDynamicPipeline() {
-            const btn = document.getElementById("btnStartPipeline");
-            btn.disabled = true;
-            btn.className = "w-full bg-slate-800 text-slate-400 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 cursor-wait";
-            btn.innerHTML = `<i data-lucide="loader" class="w-5 h-5 animate-spin text-govSaffron"></i><span>Executing Multi-Engine Analysis...</span>`;
+        function submitCollegeApplication() {
+            const catSpec = APH_CATEGORIES[currentAppCategory];
+            const currentStaged = stagedCategoryFiles[currentAppCategory] || {};
+            const uploadedCount = Object.keys(currentStaged).length;
+
+            if (uploadedCount === 0) {
+                alert("Please stage statutory documents before submitting.");
+                return;
+            }
+
+            const isLegalChecked = document.getElementById("checkLegalUndertaking")?.checked;
+            if (!isLegalChecked) {
+                alert("Please review and check the legal affirmation checkbox under oath.");
+                return;
+            }
+
+            dossierSubmittedByCollege = true;
+
+            // Update timestamp
+            const now = new Date().toISOString().replace('T', ' ').slice(0, 19) + " IST";
+            const tsElem = document.getElementById("receiptTimestamp");
+            if (tsElem) tsElem.innerText = now;
+
+            // Log event to Merkle audit trail
+            auditLedger.push({
+                index: auditLedger.length + 1,
+                blockHash: "e48102948201a0bc192849102819201948201a0bc1928491028192019482019a",
+                prevHash: auditLedger[auditLedger.length - 1].blockHash,
+                actor: "COLLEGE_REGISTRAR (Royal Institute)",
+                action: "SUBMIT_STATUTORY_DOSSIER",
+                appId: "AICTE-1-499102",
+                time: now
+            });
+            renderAuditLedger();
+
+            // Transition UI from Pending to Success Receipt
+            document.getElementById("efilingPendingPanel").classList.add("hidden");
+            document.getElementById("efilingSuccessReceipt").classList.remove("hidden");
             lucide.createIcons();
 
-            const consoleBox = document.getElementById("liveConsoleFeed");
-            consoleBox.innerHTML = `<div class="text-blue-400 font-mono">// INITIALIZING SAMPARK-SATYA PIPELINE FOR [${currentAppCategory}]...</div>`;
+            alert(`✓ Statutory Dossier E-Filed Successfully!\nAcknowledgement No: AICTE/ACK/2024/499102\n\nYour dossier has been securely dispatched to the AICTE Regulation Bureau for live Multi-Agent AI Scrutiny.`);
+        }
 
-            let logs = [];
-            if (currentAppCategory === 'EOA') {
-                logs = [
-                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Computing SHA-256 non-repudiation hashes & verifying DPDP privacy vault...` },
-                    { delay: 650, text: `<span class="text-blue-400">[2/5 PARSING]</span> Docling Layout Engine + RapidOCR extracting 14 key regulatory entities...` },
-                    { delay: 1050, text: `<span class="text-amber-400">[3/5 TRIANGULATION]</span> <strong class="text-rose-400">PERJURY DETECTED!</strong> Affidavit swears Permanent OC, but Municipal file is Provisional 1-yr!` },
-                    { delay: 1400, text: `<span class="text-amber-400">[3/5 TRIANGULATION]</span> <strong class="text-rose-400">AREA INFLATION!</strong> Sworn 16,500 sq.m vs Municipal Certified 11,200 sq.m (32% deficit).` },
-                    { delay: 1800, text: `<span class="text-purple-400">[4/5 FORENSICS]</span> pyHanko checking PAdES digital signature... <span class="text-rose-400">FAILED: Post-sign bytes injected!</span>` },
-                    { delay: 2200, text: `<span class="text-purple-400">[4/5 FORENSICS]</span> Error Level Analysis (ELA): <span class="text-rose-400">4.82x compression variance</span> on Fire NOC year '2027'.` },
-                    { delay: 2600, text: `<span class="text-emerald-400">[5/5 GRAPH AUDIT]</span> Faculty Integrity Graph: <span class="text-rose-400">2 GHOST FACULTY COLLISIONS</span> with Greenfield Tech (INST_101).` },
-                    { delay: 3000, text: `<span class="text-rose-400 font-bold">[RESULT]</span> Computed Regulatory Trust Index (RTI): <strong class="text-white bg-rose-700 px-1.5 py-0.5 rounded">28.5/100 (RED TRACK)</strong>` },
-                    { delay: 3400, text: `<span class="text-emerald-300 font-bold">✓ Sealed to Merkle Audit Block #4. Dossier dispatched to AICTE Scrutiny Committee!</span>` }
-                ];
-            } else if (currentAppCategory === 'NEW_INSTITUTION') {
-                logs = [
-                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Checking Society Deed, Land Title & 30-Year Lease deed verification...` },
-                    { delay: 650, text: `<span class="text-blue-400">[2/5 PARSING]</span> Town Planning Authority Master Plan layout extraction: 5.0 contiguous acres.` },
-                    { delay: 1050, text: `<span class="text-emerald-400">[3/5 LAND NORMS]</span> Contiguous acreage (5.0 Acres in Rural Zone >= 4.0 norm) -> <span class="text-emerald-300 font-bold">VERIFIED</span>.` },
-                    { delay: 1400, text: `<span class="text-emerald-400">[4/5 SAFETY & PWD]</span> Structural Stability & Barrier-Free Environment -> <span class="text-emerald-300 font-bold">VERIFIED</span>.` },
-                    { delay: 1800, text: `<span class="text-purple-400">[5/5 ENDOWMENT]</span> Joint Fixed Deposit Receipt Rs. 1.00 Crore verified via SBI API lien gateway.` },
-                    { delay: 2200, text: `<span class="text-emerald-400 font-bold">[RESULT]</span> Computed Regulatory Trust Index (RTI): <strong class="text-slate-900 bg-emerald-300 px-1.5 py-0.5 rounded">94.0/100 (GREEN TRACK)</strong>` },
-                    { delay: 2600, text: `<span class="text-emerald-300 font-bold">✓ Stage-1 Scrutiny Passed. Recommend Physical EVC Inspection for final Letter of Approval.</span>` }
-                ];
-            } else if (currentAppCategory === 'INTAKE_EXPANSION') {
-                logs = [
-                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Validating Governing Body Resolution & NBA Accreditation Certificate...` },
-                    { delay: 650, text: `<span class="text-emerald-400">[2/5 ACCREDITATION]</span> NBA Tier-II Accreditation valid till 2025 -> <span class="text-emerald-300 font-bold">ELIGIBLE</span>.` },
-                    { delay: 1050, text: `<span class="text-amber-400">[3/5 INFRASTRUCTURE]</span> Additional carpet area (+1,420 sq.m) satisfies APH 2024-27 Clause 2.11.` },
-                    { delay: 1450, text: `<span class="text-rose-400">[4/5 FACULTY PREREQ]</span> Current verified FSR is 1:22.8 (Deficit of 4 Professors before expansion permitted).` },
-                    { delay: 1850, text: `<span class="text-amber-400 font-bold">[RESULT]</span> Computed Regulatory Trust Index (RTI): <strong class="text-slate-900 bg-amber-400 px-1.5 py-0.5 rounded">66.5/100 (AMBER TRACK)</strong>` },
-                    { delay: 2250, text: `<span class="text-amber-300 font-bold">✓ Deficiency Notice drafted: Cure faculty deficit before seat increase approval.</span>` }
-                ];
-            } else {
-                logs = [
-                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Verifying Trust Closure Resolution & State Government Concurrence...` },
-                    { delay: 650, text: `<span class="text-blue-400">[2/5 NOC CHECK]</span> State Technical Education Department NOC DTE/CLS/2024/114 confirmed.` },
-                    { delay: 1050, text: `<span class="text-emerald-400">[3/5 MIGRATION]</span> 42 affected students successfully mapped to neighboring institutions.` },
-                    { delay: 1450, text: `<span class="text-emerald-400">[4/5 LIABILITIES]</span> Statutory Zero Liability & Staff Terminal Settlement Undertaking -> <span class="text-emerald-300 font-bold">VERIFIED</span>.` },
-                    { delay: 1850, text: `<span class="text-emerald-400 font-bold">[RESULT]</span> Order of Progressive Closure formulated for AICTE Executive Committee sign-off.` }
-                ];
+        function switchToOfficerAndScrutinize(appId) {
+            // Smoothly switch perspective to AICTE Regulation Bureau Officer
+            handleRoleChange('OFFICER', true);
+            switchTab('tab-scrutiny');
+
+            // Scroll to the Multi-Agent command center
+            const commandCenter = document.getElementById("officerDossierStatusBadge");
+            if (commandCenter) {
+                commandCenter.scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        async function executeOfficerMultiAgentPipeline() {
+            const btn = document.getElementById("btnOfficerRunMultiAgent");
+            btn.disabled = true;
+            btn.className = "bg-slate-800 text-slate-400 font-bold px-4 py-2.5 rounded-xl shadow-md flex items-center gap-2 text-xs cursor-wait";
+            btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin text-govSaffron"></i><span>Executing 6 Autonomous Agents...</span>`;
+            lucide.createIcons();
+
+            const consoleBox = document.getElementById("officerLiveConsoleFeed");
+            consoleBox.innerHTML = `<div class="text-blue-400 font-mono">// INITIALIZING SAMPARK-SATYA MULTI-AGENT SWARM FOR [AICTE-1-499102]...</div>`;
+
+            const logs = [
+                { delay: 300, text: `<span class="text-blue-400 font-bold">[AGENT 1: INGESTION & HASH VAULT]</span> Computing SHA-256 non-repudiation hashes & verifying DPDP Act privacy token vault...` },
+                { delay: 650, text: `<span class="text-blue-400 font-bold">[AGENT 2: DOCLING LAYOUT & OCR]</span> Docling layout parser + RapidOCR extracting 14 key entities across affidavit, fire NOC & OC...` },
+                { delay: 1050, text: `<span class="text-amber-400 font-bold">[AGENT 3: AFFIDAVIT TRIANGULATOR]</span> <strong class="text-rose-400">PERJURY DETECTED!</strong> Affidavit swears Permanent OC, but Municipal file is Provisional 1-yr!` },
+                { delay: 1400, text: `<span class="text-amber-400 font-bold">[AGENT 3: AFFIDAVIT TRIANGULATOR]</span> <strong class="text-rose-400">AREA INFLATION!</strong> Sworn 16,500 sq.m vs Municipal Certified 11,200 sq.m (32% deficit).` },
+                { delay: 1800, text: `<span class="text-purple-400 font-bold">[AGENT 4: FORENSIC ELA & PAdES]</span> pyHanko checking PAdES digital signature... <span class="text-rose-400">FAILED: Post-sign byte injection!</span>` },
+                { delay: 2200, text: `<span class="text-purple-400 font-bold">[AGENT 4: FORENSIC ELA & PAdES]</span> Error Level Analysis (ELA): <span class="text-rose-400">4.82x compression variance</span> on Fire NOC year '2027'.` },
+                { delay: 2600, text: `<span class="text-emerald-400 font-bold">[AGENT 5: FACULTY INTEGRITY GRAPH]</span> FIG Graph query: <span class="text-rose-400">2 GHOST FACULTY COLLISIONS</span> active in Greenfield Tech (INST_101).` },
+                { delay: 3000, text: `<span class="text-rose-400 font-bold">[AGENT 6: COMPOSITE TRUST INDEX]</span> Calculated Regulatory Trust Index (RTI): <strong class="text-white bg-rose-700 px-1.5 py-0.5 rounded">28.5/100 (RED TRACK)</strong>` },
+                { delay: 3400, text: `<span class="text-emerald-300 font-bold">✓ Sealed to Merkle Audit Block #5. Mandatory Surprise EVC Physical Inspection Recommended!</span>` }
+            ];
 
             for (const log of logs) {
                 await new Promise(r => setTimeout(r, log.delay));
@@ -1869,10 +2114,32 @@
                 consoleBox.scrollTop = consoleBox.scrollHeight;
             }
 
-            btn.className = "w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2";
-            btn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-white"></i><span>Analysis Complete (${currentAppCategory})</span>`;
-            
-            document.getElementById("jumpToScrutinySection").classList.remove("hidden");
+            btn.disabled = false;
+            btn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl shadow-md transition flex items-center gap-2 text-xs cursor-pointer";
+            btn.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-white"></i><span>Scrutiny Complete (RTI: 28.5 / Red Track)</span>`;
+
+            // Update badge
+            const statusBadge = document.getElementById("officerDossierStatusBadge");
+            if (statusBadge) {
+                statusBadge.className = "bg-rose-500/20 text-rose-300 border border-rose-400/40 px-2 py-0.5 rounded font-bold text-[11px]";
+                statusBadge.innerText = "SCRUTINIZED • RED TRACK (SURPRISE EVC INSPECTION MANDATORY)";
+            }
+
+            // Append Block to Merkle Audit Trail
+            auditLedger.push({
+                index: auditLedger.length + 1,
+                blockHash: "9a0bc192849102819201948201a0bc1928491028192019482019a48102948201",
+                prevHash: auditLedger[auditLedger.length - 1].blockHash,
+                actor: "AICTE_MULTI_AGENT_SWARM",
+                action: "FLAG_PERJURY_AND_ROUTE_EVC",
+                appId: "AICTE-1-499102",
+                time: new Date().toISOString().replace('T', ' ').slice(0, 19)
+            });
+            renderAuditLedger();
+
+            // Refresh table and open Dossier Inspector for the Officer
+            renderApplicationQueue(applications);
+            openDossierInspector('AICTE-1-499102');
             lucide.createIcons();
         }
 
