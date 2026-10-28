@@ -240,77 +240,95 @@
                                 <i data-lucide="folder-check" class="w-4 h-4 text-govBlue"></i>
                                 Mandatory Supporting Dossier Files (EoA 2024–25)
                             </h3>
-                            <p class="text-[11px] text-slate-500">Click "Auto-Load Sample College Dossier" for instant one-click demonstration.</p>
+                            <p class="text-[11px] text-slate-500">Click any slot to browse & upload your own PDF/TXT/IMG, or use auto-fill.</p>
                         </div>
                         <button onclick="autoLoadSampleDossier()" class="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-xs">
                             <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-700"></i>
-                            Auto-Load Sample College Dossier
+                            Auto-Fill Sample Files
                         </button>
                     </div>
 
-                    <!-- 4 Document Upload Cards -->
+                    <!-- 4 Document Upload Cards with REAL file pickers -->
                     <div class="space-y-3" id="uploadSlotsContainer">
+                        <!-- Hidden Real File Inputs -->
+                        <input type="file" id="file-input-affidavit" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'affidavit')">
+                        <input type="file" id="file-input-fire" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'fire')">
+                        <input type="file" id="file-input-oc" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'oc')">
+                        <input type="file" id="file-input-faculty" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'faculty')">
+
                         <!-- Slot 1: Affidavit -->
-                        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3" id="slot-affidavit">
+                        <div onclick="document.getElementById('file-input-affidavit').click()" class="p-3.5 bg-slate-50 hover:bg-blue-50/50 border-2 border-dashed border-slate-300 hover:border-govBlue rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-affidavit">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                                <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
                                     <i data-lucide="file-text" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-slate-900">1. Sworn Legal Affidavit-2 (Rs. 100 Stamp)</div>
-                                    <div class="text-[11px] text-slate-500" id="slot-affidavit-desc">Sworn under oath before 1st Class Magistrate / Notary</div>
+                                    <div class="text-xs font-bold text-slate-900 group-hover:text-govBlue transition flex items-center gap-1.5">
+                                        <span>1. Sworn Legal Affidavit-2 (Rs. 100 Stamp)</span>
+                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-govBlue"></i>
+                                    </div>
+                                    <div class="text-[11px] text-slate-500" id="slot-affidavit-desc">Click to browse file from your computer (PDF / TXT / Image)</div>
                                 </div>
                             </div>
-                            <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700" id="slot-affidavit-status">Pending Upload</span>
+                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-affidavit-status">Choose File</span>
                         </div>
 
                         <!-- Slot 2: Fire NOC -->
-                        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3" id="slot-fire">
+                        <div onclick="document.getElementById('file-input-fire').click()" class="p-3.5 bg-slate-50 hover:bg-rose-50/50 border-2 border-dashed border-slate-300 hover:border-rose-500 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-fire">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
+                                <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
                                     <i data-lucide="flame" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-slate-900">2. State Fire Safety Clearance (NOC)</div>
-                                    <div class="text-[11px] text-slate-500" id="slot-fire-desc">Must be valid on/after 01-Aug-2024 academic start</div>
+                                    <div class="text-xs font-bold text-slate-900 group-hover:text-rose-700 transition flex items-center gap-1.5">
+                                        <span>2. State Fire Safety Clearance (NOC)</span>
+                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-rose-700"></i>
+                                    </div>
+                                    <div class="text-[11px] text-slate-500" id="slot-fire-desc">Click to browse file from your computer (PDF / TXT / Image)</div>
                                 </div>
                             </div>
-                            <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700" id="slot-fire-status">Pending Upload</span>
+                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-fire-status">Choose File</span>
                         </div>
 
                         <!-- Slot 3: Occupancy Certificate -->
-                        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3" id="slot-oc">
+                        <div onclick="document.getElementById('file-input-oc').click()" class="p-3.5 bg-slate-50 hover:bg-amber-50/50 border-2 border-dashed border-slate-300 hover:border-amber-500 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-oc">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
                                     <i data-lucide="landmark" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-slate-900">3. Municipal Occupancy Certificate (OC)</div>
-                                    <div class="text-[11px] text-slate-500" id="slot-oc-desc">Issued by local Municipal Corporation / Town Planning</div>
+                                    <div class="text-xs font-bold text-slate-900 group-hover:text-amber-700 transition flex items-center gap-1.5">
+                                        <span>3. Municipal Occupancy Certificate (OC)</span>
+                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-700"></i>
+                                    </div>
+                                    <div class="text-[11px] text-slate-500" id="slot-oc-desc">Click to browse file from your computer (PDF / TXT / Image)</div>
                                 </div>
                             </div>
-                            <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700" id="slot-oc-status">Pending Upload</span>
+                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-oc-status">Choose File</span>
                         </div>
 
                         <!-- Slot 4: Faculty Master -->
-                        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3" id="slot-faculty">
+                        <div onclick="document.getElementById('file-input-faculty').click()" class="p-3.5 bg-slate-50 hover:bg-purple-50/50 border-2 border-dashed border-slate-300 hover:border-purple-500 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-faculty">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                                <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
                                     <i data-lucide="users" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs font-bold text-slate-900">4. Teaching Faculty Master Roster</div>
-                                    <div class="text-[11px] text-slate-500" id="slot-faculty-desc">Names, PAN tokens, AICTE Faculty IDs & Joining Dates</div>
+                                    <div class="text-xs font-bold text-slate-900 group-hover:text-purple-700 transition flex items-center gap-1.5">
+                                        <span>4. Teaching Faculty Master Roster</span>
+                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-purple-700"></i>
+                                    </div>
+                                    <div class="text-[11px] text-slate-500" id="slot-faculty-desc">Click to browse file from your computer (PDF / TXT / CSV)</div>
                                 </div>
                             </div>
-                            <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700" id="slot-faculty-status">Pending Upload</span>
+                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-faculty-status">Choose File</span>
                         </div>
                     </div>
 
                     <!-- Action Button -->
                     <button onclick="executeLivePipelineWalkthrough()" id="btnStartPipeline" disabled class="w-full bg-slate-300 text-slate-600 font-bold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed">
                         <i data-lucide="play-circle" class="w-5 h-5"></i>
-                        <span>Load Dossier First to Trigger Live Processing</span>
+                        <span id="btnStartPipelineText">Select or Auto-Fill Files to Trigger Live Processing</span>
                     </button>
                 </div>
 
@@ -962,9 +980,39 @@
         // LIVE DEMO WALKTHROUGH FUNCTIONS (FOR JUDGES)
         // =========================================================================
         let dossierLoaded = false;
+        let uploadedSlots = { affidavit: false, fire: false, oc: false, faculty: false };
+
+        function handleUserFileUpload(event, slotType) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            uploadedSlots[slotType] = true;
+            dossierLoaded = true;
+
+            const sizeKB = (file.size / 1024).toFixed(1);
+            const statusBadge = document.getElementById(`slot-${slotType}-status`);
+            statusBadge.className = "text-[11px] font-bold px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1";
+            statusBadge.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> ${sizeKB} KB`;
+
+            const descElem = document.getElementById(`slot-${slotType}-desc`);
+            descElem.innerHTML = `<span class="text-emerald-700 font-bold truncate block max-w-xs">✓ ${file.name}</span>`;
+
+            // Check if at least 1 file is uploaded to enable execution
+            const uploadedCount = Object.values(uploadedSlots).filter(Boolean).length;
+            const btn = document.getElementById("btnStartPipeline");
+            btn.disabled = false;
+            btn.className = "w-full bg-govNavy hover:bg-govBlue text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer border-2 border-govSaffron animate-pulse";
+            btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5 text-govSaffron fill-govSaffron"></i><span>Trigger AI Scrutiny Pipeline (${uploadedCount}/4 Files Uploaded)</span>`;
+
+            const consoleBox = document.getElementById("liveConsoleFeed");
+            consoleBox.innerHTML += `<div class="text-emerald-400 font-mono text-[11px]">✓ Received File: <strong>${file.name}</strong> (${sizeKB} KB) staged for ${slotType.toUpperCase()} slot.</div>`;
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+            lucide.createIcons();
+        }
 
         function autoLoadSampleDossier() {
             dossierLoaded = true;
+            uploadedSlots = { affidavit: true, fire: true, oc: true, faculty: true };
 
             // Update UI slots
             document.getElementById("slot-affidavit-desc").innerHTML = `<span class="text-emerald-700 font-semibold">✓ 1_Affidavit_2_Royal_Institute.txt</span> (Sworn: Permanent OC, 16,500 sq.m)`;
