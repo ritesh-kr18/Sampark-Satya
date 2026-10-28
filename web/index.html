@@ -148,7 +148,7 @@
                 </button>
                 <button onclick="switchTab('tab-scrutiny')" id="btn-tab-scrutiny" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
                     <i data-lucide="layout-dashboard" class="w-4 h-4 text-emerald-400"></i>
-                    <span>Officer Scrutiny Board</span>
+                    <span id="navScrutinyText">Officer Scrutiny Board</span>
                 </button>
                 <button onclick="switchTab('tab-simulator')" id="btn-tab-simulator" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
                     <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
@@ -280,6 +280,9 @@
                             <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Royal Institute of Advanced Studies</div>
                             <div class="text-[10px] text-slate-400 font-mono">ID: AICTE-1-499102 • EoA Cycle</div>
                             <p class="text-[11px] text-slate-500 mt-2 line-clamp-2">Upload multi-document statutory checklists, run pre-audit sanity checks, and eliminate deficiencies before TER fee payment.</p>
+                            <div class="mt-2 text-[10px] font-bold text-govBlue bg-blue-50 px-2 py-1 rounded border border-blue-200">
+                                🔑 Role Access: College Portal (E-Filing) & Pre-Audit Simulator
+                            </div>
                         </div>
                         <button onclick="loginAsRole('COLLEGE')" class="w-full bg-blue-50 hover:bg-govBlue text-govBlue hover:text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-xs">
                             <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
@@ -300,6 +303,9 @@
                             <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Dr. S. Ramanathan (Bureau Chief)</div>
                             <div class="text-[10px] text-slate-400 font-mono">Employee ID: AICTE-HQ-94021</div>
                             <p class="text-[11px] text-slate-500 mt-2 line-clamp-2">Scrutinize risk-stratified queues (Green/Amber/Red), examine ELA tampering heatmaps, and issue statutory sanction orders.</p>
+                            <div class="mt-2 text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-1 rounded border border-emerald-200">
+                                🔑 Role Access: Scrutiny Board, FIG Graph, Triangulation, Audit Ledger & Sandbox
+                            </div>
                         </div>
                         <button onclick="loginAsRole('OFFICER')" class="w-full bg-emerald-50 hover:bg-emerald-700 text-emerald-800 hover:text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-xs">
                             <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
@@ -320,6 +326,9 @@
                             <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Prof. K. Meenakshi (EVC Chair)</div>
                             <div class="text-[10px] text-slate-400 font-mono">Committee Code: EVC-MH-7721</div>
                             <p class="text-[11px] text-slate-500 mt-2 line-clamp-2">Access high-risk red-track dossiers, audit geofenced physical campus photos, and submit field verification reports.</p>
+                            <div class="mt-2 text-[10px] font-bold text-purple-800 bg-purple-50 px-2 py-1 rounded border border-purple-200">
+                                🔑 Role Access: EVC Red-Track Inspection Board, Affidavit Triangulation & Audit Ledger
+                            </div>
                         </div>
                         <button onclick="loginAsRole('EVC')" class="w-full bg-purple-50 hover:bg-purple-700 text-purple-800 hover:text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-xs">
                             <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
@@ -1297,8 +1306,16 @@
             logoutUser(); // Starting state: ONLY Home/Login page shown; dashboard opens upon login
         });
 
-        // Tab Switching Logic
+        // Tab Switching Logic with Strict Role Access Guarding
         function switchTab(tabId) {
+            if (tabId !== 'tab-home' && isAuthenticated) {
+                const config = ROLE_PERMISSIONS[currentActiveRole];
+                if (config && !config.allowedTabs.includes(tabId)) {
+                    // Redirect unallowed tab attempt to the role's default tab
+                    tabId = config.defaultTab;
+                }
+            }
+
             document.querySelectorAll("main > section").forEach(sec => sec.classList.add("hidden"));
             const targetSection = document.getElementById(tabId);
             if (targetSection) targetSection.classList.remove("hidden");
@@ -1860,46 +1877,88 @@
         }
 
         // =========================================================================
-        // ROLE SELECTION & HOME PAGE AUTHENTICATION LOGIC
+        // ROLE SELECTION & HOME PAGE AUTHENTICATION LOGIC (STRICT ROLE ACCESS)
         // =========================================================================
         let currentActiveRole = 'OFFICER';
         let isAuthenticated = false;
+
+        // Role-Based Navigation Permissions Mapping
+        // - COLLEGE: College Portal (E-Filing) & Pre-Audit Simulator only
+        // - OFFICER: Officer Scrutiny Board, FIG Graph, Affidavit Triangulation, 6-State Audit Ledger & Simulator
+        // - EVC: EVC Inspection Board (Red-Track), Affidavit Triangulation & Audit Ledger
+        const ROLE_PERMISSIONS = {
+            COLLEGE: {
+                allowedTabs: ['tab-upload', 'tab-simulator'],
+                defaultTab: 'tab-upload',
+                roleLabel: 'Registrar: Royal Institute (AICTE-1-499102)',
+                scrutinyTitle: 'Officer Scrutiny Board'
+            },
+            OFFICER: {
+                allowedTabs: ['tab-scrutiny', 'tab-graph', 'tab-triangulation', 'tab-audit', 'tab-simulator'],
+                defaultTab: 'tab-scrutiny',
+                roleLabel: 'Officer: Dr. S. Ramanathan (Bureau Chief)',
+                scrutinyTitle: 'Officer Scrutiny Board'
+            },
+            EVC: {
+                allowedTabs: ['tab-scrutiny', 'tab-triangulation', 'tab-audit'],
+                defaultTab: 'tab-scrutiny',
+                roleLabel: 'EVC Inspector: Prof. K. Meenakshi (EVC-MH-7721)',
+                scrutinyTitle: 'EVC Inspection Board (Red Track)'
+            }
+        };
+
+        function applyRoleNavigationPermissions(role) {
+            const config = ROLE_PERMISSIONS[role] || ROLE_PERMISSIONS.OFFICER;
+            const allTabIds = ['tab-upload', 'tab-scrutiny', 'tab-simulator', 'tab-graph', 'tab-triangulation', 'tab-audit'];
+
+            allTabIds.forEach(tabId => {
+                const btn = document.getElementById("btn-" + tabId);
+                if (btn) {
+                    if (config.allowedTabs.includes(tabId)) {
+                        btn.classList.remove("hidden");
+                    } else {
+                        btn.classList.add("hidden");
+                    }
+                }
+            });
+
+            const scrutinyText = document.getElementById("navScrutinyText");
+            if (scrutinyText) {
+                scrutinyText.innerText = config.scrutinyTitle;
+            }
+        }
 
         function performLogin(role, customIdentity = null) {
             isAuthenticated = true;
             currentActiveRole = role;
 
-            // Unlock and reveal the dashboard nav bar; hide public ribbon
+            // Unlock and reveal dashboard nav; hide public ribbon
             const navDashboard = document.getElementById("navDashboardBar");
             const navPublic = document.getElementById("navPublicBar");
             if (navDashboard) navDashboard.classList.remove("hidden");
             if (navPublic) navPublic.classList.add("hidden");
 
+            // Apply role-based tab visibility
+            applyRoleNavigationPermissions(role);
+
             // Update role selector dropdown & identity badge
             const selector = document.getElementById("userRoleSelector");
             if (selector) selector.value = role;
 
+            const config = ROLE_PERMISSIONS[role] || ROLE_PERMISSIONS.OFFICER;
             const badgeText = document.getElementById("navUserIdentityText");
             if (customIdentity) {
                 if (badgeText) badgeText.innerText = customIdentity;
             } else {
-                if (role === 'COLLEGE' && badgeText) {
-                    badgeText.innerText = "Registrar: Royal Institute (AICTE-1-499102)";
-                } else if (role === 'EVC' && badgeText) {
-                    badgeText.innerText = "EVC Inspector: Prof. K. Meenakshi (EVC-MH-7721)";
-                } else if (badgeText) {
-                    badgeText.innerText = "Officer: Dr. S. Ramanathan (Bureau Chief)";
-                }
+                if (badgeText) badgeText.innerText = config.roleLabel;
             }
 
-            // Route to initial dashboard view according to role
-            if (role === 'COLLEGE') {
-                switchTab('tab-upload');
-            } else if (role === 'EVC') {
+            // Route to initial dashboard view according to role permissions
+            if (role === 'EVC') {
                 switchTab('tab-scrutiny');
                 filterQueue('RED');
             } else {
-                switchTab('tab-scrutiny');
+                switchTab(config.defaultTab);
             }
             lucide.createIcons();
         }
@@ -1927,19 +1986,19 @@
             const selector = document.getElementById("userRoleSelector");
             if (selector) selector.value = role;
 
+            applyRoleNavigationPermissions(role);
+
+            const config = ROLE_PERMISSIONS[role] || ROLE_PERMISSIONS.OFFICER;
             const badgeText = document.getElementById("navUserIdentityText");
-            if (role === 'COLLEGE') {
-                if (badgeText) badgeText.innerText = "Registrar: Royal Institute (AICTE-1-499102)";
-                if (autoNavigate && isAuthenticated) switchTab('tab-upload');
-            } else if (role === 'EVC') {
-                if (badgeText) badgeText.innerText = "EVC Inspector: Prof. K. Meenakshi (EVC-MH-7721)";
-                if (autoNavigate && isAuthenticated) {
+            if (badgeText) badgeText.innerText = config.roleLabel;
+
+            if (autoNavigate && isAuthenticated) {
+                if (role === 'EVC') {
                     switchTab('tab-scrutiny');
                     filterQueue('RED');
+                } else {
+                    switchTab(config.defaultTab);
                 }
-            } else {
-                if (badgeText) badgeText.innerText = "Officer: Dr. S. Ramanathan (Bureau Chief)";
-                if (autoNavigate && isAuthenticated) switchTab('tab-scrutiny');
             }
             lucide.createIcons();
         }
@@ -2032,7 +2091,8 @@ Your identity credentials have been cryptographically linked to the AICTE Master
         }
 
         function jumpToScrutinyWithTarget(appId) {
-            switchTab('tab-scrutiny');
+            // For live demo presentation: Elevate to Officer role to inspect the resulting dossier
+            handleRoleChange('OFFICER', true);
             openDossierInspector(appId);
         }
 
