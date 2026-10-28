@@ -1,4 +1,4 @@
-# SAMPARK-SATYA
+# SAMPARK-SATYA (सम्पर्क-सत्य)
 ### AI-Powered Higher Education Application Validation, Document Authentication & Regulatory Scrutiny Platform
 
 An intelligent decision-support system designed for the **All India Council for Technical Education (AICTE), Ministry of Education, Government of India**. 

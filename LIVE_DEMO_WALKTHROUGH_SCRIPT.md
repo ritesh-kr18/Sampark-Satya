@@ -1,4 +1,4 @@
-# SATYA-SHIKSHA: Official 5-Minute Live Pitch & Demonstration Script
+# SAMPARK-SATYA: Official 5-Minute Live Pitch & Demonstration Script
 
 > **Target Audience:** Hackathon Judges / AICTE Evaluation Jury  
 > **Speaker Roles:** 1 Presenter + 1 Driver (operating the laptop screen)  
@@ -13,7 +13,7 @@
   > 
   > Under the Approval Process Handbook, colleges claiming 'Zero Deficiency' are granted fast-track approvals. But dishonest operators exploit this: they Photoshop certificate expiration dates, recycle temporary building permits, and list 'ghost faculty' who teach in multiple colleges simultaneously.
   > 
-  > Today, we present **SATYA-SHIKSHA (सत्य-शिक्षा)**: an AI-powered regulatory decision-support system that processes an entire institutional dossier in under 45 seconds while guaranteeing 100% human-in-the-loop statutory control."*
+  > Today, we present **SAMPARK-SATYA (सम्पर्क-सत्य)**: an AI-powered regulatory decision-support system that processes an entire institutional dossier in under 45 seconds while guaranteeing 100% human-in-the-loop statutory control."*
 
 ---
 
@@ -71,4 +71,4 @@
 * **Presenter says:**
   > *"Finally, our system is not just a policing tool. We give honest colleges a **'Shift-Left' Pre-Audit Simulator** so they can diagnose and rectify minor issues—like an expiring Fire NOC or an FSR shortfall—before paying non-refundable fees. This reduces AICTE's routine administrative backlog by over 70%.
   > 
-  > SATYA-SHIKSHA makes higher education compliance fast, authentic, and tamper-proof. Thank you, and we welcome your questions!"*
+  > SAMPARK-SATYA makes higher education compliance fast, authentic, and tamper-proof. Thank you, and we welcome your questions!"*

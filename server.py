@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AICTE SATYA-SHIKSHA Web Server & REST API Gateway
+AICTE SAMPARK-SATYA Web Server & REST API Gateway
 Serves the official Government of India styled Scrutiny Dashboard and executes live regulatory checks.
 Standard library only: runs with standard Python 3.14 without pip dependencies.
 """
@@ -46,7 +46,7 @@ class GovPortalRequestHandler(http.server.SimpleHTTPRequestHandler):
         
         if url.path == "/api/status":
             self.send_json_response({
-                "service": "AICTE_SATYA_SHIKSHA_CORE",
+                "service": "AICTE_SAMPARK_SATYA_CORE",
                 "status": "OPERATIONAL",
                 "version": "1.0.0",
                 "aph_norm": "2024-2027",
@@ -124,7 +124,7 @@ class GovPortalRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 def run_server():
     print("=" * 80)
-    print("       AICTE 'SATYA-SHIKSHA' (सत्य-शिक्षा) OFFICIAL WEB PLATFORM")
+    print("       AICTE 'SAMPARK-SATYA' (सम्पर्क-सत्य) OFFICIAL WEB PLATFORM")
     print("   AI-Powered Application Validation, Document Authentication & Scrutiny")
     print("             Ministry of Education • Government of India")
     print("=" * 80)
@@ -142,7 +142,7 @@ def run_server():
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
-            print("\nShutting down AICTE SATYA-SHIKSHA server gracefully.")
+            print("\nShutting down AICTE SAMPARK-SATYA server gracefully.")
 
 if __name__ == "__main__":
     run_server()
