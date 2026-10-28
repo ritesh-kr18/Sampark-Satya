@@ -142,12 +142,16 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between">
             <!-- Navigation Tabs -->
             <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto py-2" id="navTabs">
-                <button onclick="switchTab('tab-upload')" id="btn-tab-upload" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-900 bg-amber-400 hover:bg-amber-300 font-bold transition flex items-center gap-1.5 shadow-sm">
-                    <i data-lucide="upload-cloud" class="w-4 h-4 text-govNavy"></i>
-                    College Portal (Live Upload)
+                <button onclick="switchTab('tab-home')" id="btn-tab-home" class="nav-btn active px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition flex items-center gap-1.5 bg-govSaffron text-slate-900 font-bold shadow">
+                    <i data-lucide="home" class="w-4 h-4 text-slate-950"></i>
+                    Portal Home / Login
                 </button>
-                <button onclick="switchTab('tab-scrutiny')" id="btn-tab-scrutiny" class="nav-btn active px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition flex items-center gap-1.5 bg-govSaffron text-slate-900 font-bold shadow">
-                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                <button onclick="switchTab('tab-upload')" id="btn-tab-upload" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
+                    <i data-lucide="upload-cloud" class="w-4 h-4 text-amber-400"></i>
+                    College Portal (E-Filing)
+                </button>
+                <button onclick="switchTab('tab-scrutiny')" id="btn-tab-scrutiny" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 text-emerald-400"></i>
                     Officer Scrutiny Board
                 </button>
                 <button onclick="switchTab('tab-simulator')" id="btn-tab-simulator" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
@@ -155,25 +159,33 @@
                     "Shift-Left" Pre-Audit Simulator
                 </button>
                 <button onclick="switchTab('tab-graph')" id="btn-tab-graph" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
-                    <i data-lucide="users" class="w-4 h-4 text-emerald-400"></i>
+                    <i data-lucide="users" class="w-4 h-4 text-sky-400"></i>
                     Faculty Integrity Graph (FIG)
                 </button>
                 <button onclick="switchTab('tab-triangulation')" id="btn-tab-triangulation" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
-                    <i data-lucide="scale" class="w-4 h-4 text-sky-300"></i>
-                    Affidavit vs Evidence Triangulation
+                    <i data-lucide="scale" class="w-4 h-4 text-purple-300"></i>
+                    Affidavit Triangulation
                 </button>
                 <button onclick="switchTab('tab-audit')" id="btn-tab-audit" class="nav-btn px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 transition flex items-center gap-1.5">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-purple-300"></i>
-                    6-State Verification & Merkle Audit
+                    <i data-lucide="shield-check" class="w-4 h-4 text-rose-300"></i>
+                    6-State Audit Ledger
                 </button>
             </nav>
 
-            <!-- Role Badge -->
-            <div class="py-2 flex items-center gap-2 text-xs">
-                <span class="text-slate-300">Active Role:</span>
-                <span class="bg-emerald-900/60 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
-                    <i data-lucide="shield" class="w-3.5 h-3.5"></i> Regulation Bureau Officer
-                </span>
+            <!-- Active User & Role Switcher -->
+            <div class="py-2 flex items-center gap-2 sm:gap-3 text-xs">
+                <div id="navUserBadge" class="bg-govNavy/90 border border-govSaffron/60 px-2.5 py-1 rounded-md text-amber-300 font-bold flex items-center gap-1.5 shadow-xs">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-govSaffron"></i>
+                    <span id="navUserIdentityText">Officer: Dr. S. Ramanathan (Bureau Chief)</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-slate-300 hidden sm:inline">Role:</span>
+                    <select id="userRoleSelector" onchange="handleRoleChange(this.value, true)" class="bg-govNavy border border-govSaffron/60 text-amber-300 px-2.5 py-1 rounded-md font-bold focus:outline-none focus:ring-1 focus:ring-amber-400 cursor-pointer text-xs">
+                        <option value="OFFICER">AICTE Regulation Bureau Officer</option>
+                        <option value="COLLEGE">College Registrar / Principal</option>
+                        <option value="EVC">EVC Inspection Committee Member</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -184,151 +196,464 @@
         <!-- ========================================================================= -->
         <!-- TAB 0: COLLEGE PORTAL (LIVE UPLOAD & REAL-TIME AUDIT WALKTHROUGH)          -->
         <!-- ========================================================================= -->
+                <!-- ========================================================================= -->
+        <!-- TAB: PORTAL HOME / LOGIN & REGISTRATION GATEWAY                         -->
+        <!-- ========================================================================= -->
+        <section id="tab-home" class="space-y-8">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-govNavy via-govBlue to-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-lg border-b-4 border-govSaffron relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                    <i data-lucide="shield-check" class="w-72 h-72 text-white"></i>
+                </div>
+                <div class="relative z-10 max-w-4xl space-y-3">
+                    <div class="inline-flex items-center gap-2 bg-govSaffron text-slate-950 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider shadow">
+                        <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                        <span>AICTE Regulation Bureau • National Compliance Gateway</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                        SATYA-SHIKSHA <span class="text-amber-300 font-serif font-normal">(सत्य-शिक्षा)</span>
+                    </h1>
+                    <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-3xl">
+                        AI-Powered Application Validation, Multi-Document Forensic Authentication & Regulatory Compliance Verification Portal under <strong>AICTE Approval Process Handbook (APH 2024–2027)</strong>.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-2 sm:gap-4 text-xs font-semibold text-slate-300">
+                        <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/15 flex items-center gap-1.5">
+                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+                            14,280+ Technical Institutions
+                        </span>
+                        <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/15 flex items-center gap-1.5">
+                            <i data-lucide="layers" class="w-3.5 h-3.5 text-amber-400"></i>
+                            4 Statutory APH Categories
+                        </span>
+                        <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/15 flex items-center gap-1.5">
+                            <i data-lucide="shield" class="w-3.5 h-3.5 text-sky-400"></i>
+                            DPDP Act 2023 Compliant Vault
+                        </span>
+                        <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/15 flex items-center gap-1.5">
+                            <i data-lucide="database" class="w-3.5 h-3.5 text-purple-400"></i>
+                            Immutable Merkle Audit Ledger
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single-Click Live Demo Personas for Judges -->
+            <div class="bg-slate-50 border-2 border-dashed border-govSaffron/70 p-5 rounded-2xl space-y-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="flex h-2.5 w-2.5 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                        </span>
+                        <h3 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-800">
+                            Single-Click Live Demo Personas (Evaluation Shortcut)
+                        </h3>
+                    </div>
+                    <span class="text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">Select role to preview live journey</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                    <!-- Persona 1: College Registrar -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-govBlue hover:shadow-md transition space-y-3 group">
+                        <div class="flex items-start justify-between">
+                            <div class="w-10 h-10 rounded-xl bg-blue-100 text-govBlue flex items-center justify-center font-bold">
+                                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">Institution Level</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-black text-slate-900 group-hover:text-govBlue transition">College Registrar / Principal</div>
+                            <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Royal Institute of Advanced Studies</div>
+                            <div class="text-[10px] text-slate-400 font-mono">ID: AICTE-1-499102 • EoA Cycle</div>
+                            <p class="text-[11px] text-slate-500 mt-2 line-clamp-2">Upload multi-document statutory checklists, run pre-audit sanity checks, and eliminate deficiencies before TER fee payment.</p>
+                        </div>
+                        <button onclick="loginAsRole('COLLEGE')" class="w-full bg-blue-50 hover:bg-govBlue text-govBlue hover:text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-xs">
+                            <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+                            <span>Demo as College Registrar</span>
+                        </button>
+                    </div>
+
+                    <!-- Persona 2: AICTE Bureau Officer -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:shadow-md transition space-y-3 group">
+                        <div class="flex items-start justify-between">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                                <i data-lucide="shield" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Regulation Bureau</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-black text-slate-900 group-hover:text-emerald-700 transition">AICTE Regulation Bureau Officer</div>
+                            <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Dr. S. Ramanathan (Bureau Chief)</div>
+                            <div class="text-[10px] text-slate-400 font-mono">Employee ID: AICTE-HQ-94021</div>
+                            <p class="text-[11px] text-slate-500 mt-2 line-clamp-2">Scrutinize risk-stratified queues (Green/Amber/Red), examine ELA tampering heatmaps, and issue statutory sanction orders.</p>
+                        </div>
+                        <button onclick="loginAsRole('OFFICER')" class="w-full bg-emerald-50 hover:bg-emerald-700 text-emerald-800 hover:text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-xs">
+                            <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+                            <span>Demo as Scrutiny Officer</span>
+                        </button>
+                    </div>
+
+                    <!-- Persona 3: EVC Committee Member -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 hover:border-purple-600 hover:shadow-md transition space-y-3 group">
+                        <div class="flex items-start justify-between">
+                            <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-bold">
+                                <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Field Committee</span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-black text-slate-900 group-hover:text-purple-700 transition">EVC Inspection Committee Member</div>
+                            <div class="text-[11px] font-semibold text-slate-600 mt-0.5">Prof. K. Meenakshi (EVC Chair)</div>
+                            <div class="text-[10px] text-slate-400 font-mono">Committee Code: EVC-MH-7721</div>
+                            <p class="text-[11px] text-slate-500 mt-2 line-clamp-2">Access high-risk red-track dossiers, audit geofenced physical campus photos, and submit field verification reports.</p>
+                        </div>
+                        <button onclick="loginAsRole('EVC')" class="w-full bg-purple-50 hover:bg-purple-700 text-purple-800 hover:text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-xs">
+                            <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+                            <span>Demo as EVC Inspector</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dual Authentication & Registration Card -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left: Interactive Form (7 Cols) -->
+                <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <!-- Tab Headers -->
+                    <div class="flex border-b border-slate-200 bg-slate-50">
+                        <button onclick="switchHomeAuthTab('login')" id="btnHomeAuthLogin" class="flex-1 py-3 px-4 text-xs sm:text-sm font-bold text-govNavy border-b-2 border-govBlue bg-white flex items-center justify-center gap-2">
+                            <i data-lucide="lock" class="w-4 h-4 text-govBlue"></i>
+                            <span>Portal Sign-In (लॉग-इन)</span>
+                        </button>
+                        <button onclick="switchHomeAuthTab('register')" id="btnHomeAuthRegister" class="flex-1 py-3 px-4 text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center gap-2 transition">
+                            <i data-lucide="user-plus" class="w-4 h-4 text-slate-400"></i>
+                            <span>New Institution Registration (नवीन पंजीकरण)</span>
+                        </button>
+                    </div>
+
+                    <!-- LOGIN FORM -->
+                    <div id="homeLoginFormContainer" class="p-6 space-y-4">
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-sm">Secure Portal Authentication</h3>
+                                <p class="text-[11px] text-slate-500">Sign in with your AICTE Permanent ID / Official Employee Credentials</p>
+                            </div>
+                            <span class="text-[10px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-bold">SSL 256-Bit TLS</span>
+                        </div>
+
+                        <form onsubmit="handleLoginFormSubmit(event)" class="space-y-3.5">
+                            <!-- Role Selection -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Select Access Role <span class="text-rose-500">*</span></label>
+                                <select id="loginRole" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                    <option value="COLLEGE">College Registrar / Principal (Institution Portal)</option>
+                                    <option value="OFFICER">AICTE Regulation Bureau Officer (Scrutiny Portal)</option>
+                                    <option value="EVC">EVC Inspection Committee Member (Field Portal)</option>
+                                </select>
+                            </div>
+
+                            <!-- User / Institute ID -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">AICTE Permanent ID / User ID <span class="text-rose-500">*</span></label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                        <i data-lucide="user" class="w-4 h-4"></i>
+                                    </div>
+                                    <input type="text" id="loginUserId" value="AICTE-1-499102" required class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Password <span class="text-rose-500">*</span></label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                        <i data-lucide="key" class="w-4 h-4"></i>
+                                    </div>
+                                    <input type="password" id="loginPassword" value="••••••••••••" required class="w-full pl-9 pr-10 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                    <button type="button" onclick="togglePasswordVisibility('loginPassword')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+                                        <i data-lucide="eye" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Security CAPTCHA -->
+                            <div class="grid grid-cols-2 gap-3 items-center">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Security CAPTCHA <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="loginCaptchaInput" placeholder="Enter code" required class="w-full py-2 px-3 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold tracking-widest text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none uppercase">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-slate-500 mb-1">Captcha Code</label>
+                                    <div class="flex items-center gap-2">
+                                        <div id="captchaDisplay" class="flex-1 bg-slate-100 border border-slate-300 rounded-lg py-2 text-center font-mono font-black text-slate-800 tracking-widest select-none text-sm bg-gradient-to-r from-slate-200 via-amber-100 to-slate-200">
+                                            7K9M2
+                                        </div>
+                                        <button type="button" onclick="refreshCaptcha()" title="Refresh Captcha" class="p-2 text-slate-500 hover:text-govBlue hover:bg-slate-100 rounded-lg transition">
+                                            <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Remember & Forgot -->
+                            <div class="flex items-center justify-between text-xs pt-1">
+                                <label class="flex items-center gap-2 cursor-pointer text-slate-600 font-medium">
+                                    <input type="checkbox" checked class="rounded border-slate-300 text-govBlue focus:ring-govBlue">
+                                    <span>Remember Credentials</span>
+                                </label>
+                                <a href="javascript:void(0)" onclick="alert('Forgot Password: A secure reset link has been dispatched to your institutional Nodal Officer email.')" class="text-govBlue hover:underline font-semibold">Forgot Password?</a>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="space-y-2 pt-2">
+                                <button type="submit" class="w-full bg-govNavy hover:bg-govBlue text-white font-extrabold py-2.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm">
+                                    <i data-lucide="shield-check" class="w-4 h-4 text-amber-300"></i>
+                                    <span>Sign In to SATYA-SHIKSHA Gateway</span>
+                                </button>
+                                <button type="button" onclick="loginAsRole('COLLEGE')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 border border-slate-300">
+                                    <i data-lucide="fingerprint" class="w-3.5 h-3.5 text-govBlue"></i>
+                                    <span>Sign In with Jan Parichay (National SSO / MeriPehchaan)</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- REGISTRATION FORM -->
+                    <div id="homeRegisterFormContainer" class="p-6 space-y-4 hidden">
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-sm">New Technical Institution / Official Onboarding</h3>
+                                <p class="text-[11px] text-slate-500">Register under National Technical Education Registry (APH 2024–2027)</p>
+                            </div>
+                            <span class="text-[10px] font-mono bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded font-bold">KYC Verified</span>
+                        </div>
+
+                        <form onsubmit="handleRegisterFormSubmit(event)" class="space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Registration Category <span class="text-rose-500">*</span></label>
+                                    <select id="regRole" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                        <option value="COLLEGE">Technical Institution (Registrar / Principal)</option>
+                                        <option value="OFFICER">AICTE Regulation Bureau Scrutiny Official</option>
+                                        <option value="EVC">EVC Field Inspection Committee Member</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">AICTE Permanent ID <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="regAicteId" placeholder="e.g. 1-499102" required class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Institution Legal Name (as per Trust Deed) <span class="text-rose-500">*</span></label>
+                                <input type="text" id="regInstName" placeholder="e.g. Royal Institute of Advanced Studies" required class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">AISHE Code <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="regAisheCode" placeholder="e.g. C-18492" required class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Institution Type <span class="text-rose-500">*</span></label>
+                                    <select id="regInstType" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                        <option value="PRIVATE">Private Self-Financed</option>
+                                        <option value="GOVT">Government Institution</option>
+                                        <option value="AIDED">Government-Aided</option>
+                                        <option value="DEEMED">Deemed to be University</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">State & District <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="regLocation" placeholder="e.g. Maharashtra, Pune" required class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Head of Institution / Principal <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="regHeadName" placeholder="e.g. Dr. Ramesh K. Sharma" required class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Official Nodal Email (.edu/.ac.in/gov.in) <span class="text-rose-500">*</span></label>
+                                    <input type="email" id="regEmail" placeholder="director@royal-edu.ac.in" required class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Authorized Mobile (OTP Verified) <span class="text-rose-500">*</span></label>
+                                    <div class="flex items-center gap-1.5">
+                                        <input type="tel" id="regPhone" placeholder="9820194820" required class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono text-slate-800 focus:ring-2 focus:ring-govBlue focus:outline-none">
+                                        <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-1.5 rounded-lg border border-emerald-300 shrink-0">OTP OK</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold py-2.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-300"></i>
+                                    <span>Register & Authenticate via AICTE National Registry</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right: Regulatory Compliance Standards & Differentiators (5 Cols) -->
+                <div class="lg:col-span-5 bg-slate-900 text-white p-6 rounded-2xl shadow-md space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                                <i data-lucide="cpu" class="w-4 h-4"></i>
+                                AICTE Decision Support Architecture
+                            </span>
+                            <span class="text-[10px] text-slate-400 font-mono">APH 2024–2027</span>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            SATYA-SHIKSHA bridges institutional e-filing with autonomous AI regulatory verification while keeping final statutory decisions under the sovereign authority of AICTE officers.
+                        </p>
+
+                        <!-- Feature Checklist -->
+                        <div class="space-y-2.5 text-xs pt-1">
+                            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/60">
+                                <i data-lucide="git-merge" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-slate-100">National Faculty Integrity Graph</div>
+                                    <div class="text-[11px] text-slate-400">Detects dual-employment & ghost faculty across colleges via salted PAN/Aadhaar tokens (DPDP Act compliant).</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/60">
+                                <i data-lucide="scale" class="w-4 h-4 text-purple-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-slate-100">Sworn Affidavit Triangulation</div>
+                                    <div class="text-[11px] text-slate-400">Cross-checks legal claims against municipal records to detect perjury & inflated built-up area claims.</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/60">
+                                <i data-lucide="search" class="w-4 h-4 text-rose-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-slate-100">Forensic ELA & PAdES Validation</div>
+                                    <div class="text-[11px] text-slate-400">Catches JPEG recompression splicing (Fire NOC dates) and invalidates forged PDF digital certificates.</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/60">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <div class="font-bold text-slate-100">"Shift-Left" Pre-Audit Simulator</div>
+                                    <div class="text-[11px] text-slate-400">Empowers colleges to self-correct FSR, OC validity, and land deficits prior to formal fee payment.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                        <span>Digital India Initiative</span>
+                        <span class="text-amber-400 font-bold">100% Non-Adverse AI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 0: COLLEGE PORTAL (LIVE UPLOAD & REAL-TIME AUDIT WALKTHROUGH)          -->
+        <!-- ========================================================================= -->
         <section id="tab-upload" class="hidden space-y-6">
             <!-- College Portal Header Banner -->
             <div class="bg-gradient-to-r from-govNavy via-govBlue to-slate-900 text-white p-6 rounded-2xl shadow-md border-b-4 border-govSaffron flex flex-wrap items-center justify-between gap-4">
                 <div class="space-y-1.5 max-w-2xl">
                     <div class="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full text-xs font-black uppercase tracking-wider">
-                        <i data-lucide="building-2" class="w-3.5 h-3.5"></i> Institution E-Filing System (EoA 2024–25)
+                        <i data-lucide="building-2" class="w-3.5 h-3.5"></i> Institution E-Filing System (APH 2024–2027)
                     </div>
                     <h2 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
-                        Live Institution Document Upload & Pre-Flight Validation
+                        Statutory Regulatory Dossier Upload & AI Pre-Flight
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-300">
-                        Demonstrate live end-to-end processing: Upload regulatory files, observe instant AI parsing, see real-time fraud flags, and watch the dossier seamlessly propagate to the AICTE Officer Scrutiny Board.
+                        Upload multi-document regulatory dossiers strictly tailored to the chosen APH Application Category. Observe real-time parsing, anomaly detection, and seamless dispatch to the AICTE Scrutiny Board.
                     </p>
                 </div>
                 <div class="bg-white/10 border border-white/20 p-3 rounded-xl text-right text-xs space-y-1 hidden sm:block">
-                    <div class="text-slate-300">Logged in Institution:</div>
+                    <div class="text-slate-300">Active Institution Dossier:</div>
                     <div class="font-bold text-amber-300 text-sm">Royal Institute of Advanced Studies</div>
                     <div class="text-[11px] text-slate-400 font-mono">Permanent ID: AICTE-1-499102</div>
                 </div>
             </div>
 
-            <!-- 3-Step Live Demo Stepper -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div class="bg-white p-3.5 rounded-xl border-l-4 border-govBlue shadow-xs flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-blue-100 text-govBlue flex items-center justify-center font-bold text-sm shrink-0">1</div>
-                    <div class="text-xs">
-                        <div class="font-bold text-slate-900">Upload 4 Regulatory Files</div>
-                        <div class="text-slate-500">Affidavit, Fire NOC, OC & Faculty</div>
+            <!-- APPLICATION CATEGORY SELECTOR & APH NORMS BANNER -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-black uppercase tracking-wider text-govNavy flex items-center gap-1.5">
+                            <i data-lucide="layers" class="w-4 h-4 text-govSaffron"></i>
+                            <span>Select AICTE Application Category (APH 2024–2027)</span>
+                        </label>
+                        <p class="text-[11px] text-slate-500">Document upload requirements dynamically configure according to the selected statutory track.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <select id="appCategorySelector" onchange="handleCategoryChange(this.value)" class="bg-slate-50 border-2 border-govBlue text-govNavy font-bold px-3 py-2 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer shadow-xs">
+                            <option value="EOA">1. Extension of Approval (EoA) - Existing Institutions (7 Docs)</option>
+                            <option value="NEW_INSTITUTION">2. Establishment of New Technical Institution (8 Docs)</option>
+                            <option value="INTAKE_EXPANSION">3. Increase in Intake / Addition of Course(s) (6 Docs)</option>
+                            <option value="CLOSURE">4. Closure of Course / Institution (4 Docs)</option>
+                        </select>
                     </div>
                 </div>
-                <div class="bg-white p-3.5 rounded-xl border-l-4 border-govSaffron shadow-xs flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-sm shrink-0">2</div>
-                    <div class="text-xs">
-                        <div class="font-bold text-slate-900">Run Automated Ingestion</div>
-                        <div class="text-slate-500">OCR, ELA Forensics & Triangulation</div>
+
+                <!-- Dynamic Category Meta Strip -->
+                <div id="categoryMetaStrip" class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span id="catBadgeNorm" class="bg-govNavy text-amber-300 px-2.5 py-1 rounded-md font-mono font-bold text-[11px]">
+                            APH Clause Chapter II
+                        </span>
+                        <span id="catDescText" class="text-slate-700 font-semibold">
+                            Mandatory statutory documentation required for existing approved colleges.
+                        </span>
                     </div>
-                </div>
-                <div class="bg-white p-3.5 rounded-xl border-l-4 border-emerald-600 shadow-xs flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold text-sm shrink-0">3</div>
-                    <div class="text-xs">
-                        <div class="font-bold text-slate-900">Official Scrutiny Dispatch</div>
-                        <div class="text-slate-500">Red Track EVC dossier auto-sealed</div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-500 font-medium">Statutory Checklist:</span>
+                        <span id="catDocCountBadge" class="bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-black text-xs">
+                            7 Documents Prescribed
+                        </span>
                     </div>
                 </div>
             </div>
 
             <!-- Upload Grid & Live Pipeline Runner -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Left: 4 Document Slots (7 cols) -->
+                <!-- Left: Dynamic Multi-Document Slots (7 cols) -->
                 <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                         <div>
-                            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2" id="docListHeaderTitle">
                                 <i data-lucide="folder-check" class="w-4 h-4 text-govBlue"></i>
-                                Mandatory Supporting Dossier Files (EoA 2024–25)
+                                <span>Statutory Dossier Documents Checklist</span>
                             </h3>
-                            <p class="text-[11px] text-slate-500">Click any slot to browse & upload your own PDF/TXT/IMG, or use auto-fill.</p>
+                            <p class="text-[11px] text-slate-500">Upload your institution files (PDF/TXT/Images) or click Auto-Fill for instant evaluation.</p>
                         </div>
-                        <button onclick="autoLoadSampleDossier()" class="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-xs">
-                            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-700"></i>
-                            Auto-Fill Sample Files
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <button onclick="autoLoadCurrentCategorySample()" class="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-xs">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-700"></i>
+                                <span>Auto-Fill Category Samples</span>
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- 4 Document Upload Cards with REAL file pickers -->
-                    <div class="space-y-3" id="uploadSlotsContainer">
-                        <!-- Hidden Real File Inputs -->
-                        <input type="file" id="file-input-affidavit" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'affidavit')">
-                        <input type="file" id="file-input-fire" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'fire')">
-                        <input type="file" id="file-input-oc" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'oc')">
-                        <input type="file" id="file-input-faculty" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg" onchange="handleUserFileUpload(event, 'faculty')">
+                    <!-- Hidden Generic File Input for dynamic uploads -->
+                    <input type="file" id="genericDynamicFileInput" class="hidden" accept=".pdf,.txt,.png,.jpg,.jpeg,.csv,.docx" onchange="handleDynamicInputFileChange(event)">
 
-                        <!-- Slot 1: Affidavit -->
-                        <div onclick="document.getElementById('file-input-affidavit').click()" class="p-3.5 bg-slate-50 hover:bg-blue-50/50 border-2 border-dashed border-slate-300 hover:border-govBlue rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-affidavit">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
-                                    <i data-lucide="file-text" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold text-slate-900 group-hover:text-govBlue transition flex items-center gap-1.5">
-                                        <span>1. Sworn Legal Affidavit-2 (Rs. 100 Stamp)</span>
-                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-govBlue"></i>
-                                    </div>
-                                    <div class="text-[11px] text-slate-500" id="slot-affidavit-desc">Click to browse file from your computer (PDF / TXT / Image)</div>
-                                </div>
-                            </div>
-                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-affidavit-status">Choose File</span>
-                        </div>
-
-                        <!-- Slot 2: Fire NOC -->
-                        <div onclick="document.getElementById('file-input-fire').click()" class="p-3.5 bg-slate-50 hover:bg-rose-50/50 border-2 border-dashed border-slate-300 hover:border-rose-500 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-fire">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
-                                    <i data-lucide="flame" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold text-slate-900 group-hover:text-rose-700 transition flex items-center gap-1.5">
-                                        <span>2. State Fire Safety Clearance (NOC)</span>
-                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-rose-700"></i>
-                                    </div>
-                                    <div class="text-[11px] text-slate-500" id="slot-fire-desc">Click to browse file from your computer (PDF / TXT / Image)</div>
-                                </div>
-                            </div>
-                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-fire-status">Choose File</span>
-                        </div>
-
-                        <!-- Slot 3: Occupancy Certificate -->
-                        <div onclick="document.getElementById('file-input-oc').click()" class="p-3.5 bg-slate-50 hover:bg-amber-50/50 border-2 border-dashed border-slate-300 hover:border-amber-500 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-oc">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
-                                    <i data-lucide="landmark" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold text-slate-900 group-hover:text-amber-700 transition flex items-center gap-1.5">
-                                        <span>3. Municipal Occupancy Certificate (OC)</span>
-                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-700"></i>
-                                    </div>
-                                    <div class="text-[11px] text-slate-500" id="slot-oc-desc">Click to browse file from your computer (PDF / TXT / Image)</div>
-                                </div>
-                            </div>
-                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-oc-status">Choose File</span>
-                        </div>
-
-                        <!-- Slot 4: Faculty Master -->
-                        <div onclick="document.getElementById('file-input-faculty').click()" class="p-3.5 bg-slate-50 hover:bg-purple-50/50 border-2 border-dashed border-slate-300 hover:border-purple-500 rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group" id="slot-faculty">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
-                                    <i data-lucide="users" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold text-slate-900 group-hover:text-purple-700 transition flex items-center gap-1.5">
-                                        <span>4. Teaching Faculty Master Roster</span>
-                                        <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-purple-700"></i>
-                                    </div>
-                                    <div class="text-[11px] text-slate-500" id="slot-faculty-desc">Click to browse file from your computer (PDF / TXT / CSV)</div>
-                                </div>
-                            </div>
-                            <span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700" id="slot-faculty-status">Choose File</span>
-                        </div>
+                    <!-- Dynamic Document Checklist Container -->
+                    <div class="space-y-3 max-h-[500px] overflow-y-auto pr-1" id="dynamicDocSlotsContainer">
+                        <!-- Rendered dynamically by renderDynamicUploadSlots() -->
                     </div>
 
                     <!-- Action Button -->
-                    <button onclick="executeLivePipelineWalkthrough()" id="btnStartPipeline" disabled class="w-full bg-slate-300 text-slate-600 font-bold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed">
+                    <button onclick="executeDynamicPipeline()" id="btnStartPipeline" disabled class="w-full bg-slate-300 text-slate-600 font-bold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed">
                         <i data-lucide="play-circle" class="w-5 h-5"></i>
-                        <span id="btnStartPipelineText">Select or Auto-Fill Files to Trigger Live Processing</span>
+                        <span id="btnStartPipelineText">Select or Auto-Fill Files to Trigger Multi-Engine Scrutiny</span>
                     </button>
                 </div>
 
@@ -339,12 +664,12 @@
                             <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
                             <span class="text-xs font-bold uppercase tracking-wider text-emerald-300">Live AI Scrutiny Console</span>
                         </div>
-                        <span class="text-[10px] text-slate-400">Execution Speed: ~0.4s</span>
+                        <span class="text-[10px] text-slate-400" id="consoleExecSpeed">Compute Latency: ~0.38s</span>
                     </div>
 
                     <!-- Live Log Terminal Feed -->
                     <div class="h-80 overflow-y-auto space-y-2 text-xs pr-1" id="liveConsoleFeed">
-                        <div class="text-slate-500">// Ready for demonstration. Click "Auto-Load Sample College Dossier" to begin.</div>
+                        <div class="text-slate-500">// Ready for evaluation. Select application category and click "Auto-Fill Category Samples" or browse files.</div>
                     </div>
 
                     <!-- Jump to Officer Dashboard Button (Revealed after execution) -->
@@ -358,10 +683,7 @@
             </div>
         </section>
 
-        <!-- ========================================================================= -->
-        <!-- TAB 1: OFFICER SCRUTINY BOARD                                             -->
-        <!-- ========================================================================= -->
-        <section id="tab-scrutiny" class="space-y-6">
+<section id="tab-scrutiny" class="hidden space-y-6">
             <!-- Alert Banner / Advisory Notice -->
             <div class="bg-amber-50 border-l-4 border-govSaffron p-4 rounded-r-lg shadow-sm flex items-start gap-3">
                 <i data-lucide="alert-circle" class="w-5 h-5 text-govSaffron shrink-0 mt-0.5"></i>
@@ -952,9 +1274,13 @@
         // Initialize UI
         document.addEventListener("DOMContentLoaded", () => {
             lucide.createIcons();
+            refreshCaptcha();
+            renderDynamicUploadSlots('EOA');
             renderApplicationQueue(applications);
             runSimulator(); // Initial simulator render
             renderAuditLedger();
+            handleRoleChange('OFFICER', false);
+            switchTab('tab-home');
         });
 
         // Tab Switching Logic
@@ -977,78 +1303,484 @@
         }
 
         // =========================================================================
-        // LIVE DEMO WALKTHROUGH FUNCTIONS (FOR JUDGES)
         // =========================================================================
-        let dossierLoaded = false;
-        let uploadedSlots = { affidavit: false, fire: false, oc: false, faculty: false };
+        // APH 2024-2027 APPLICATION CATEGORIES & DYNAMIC CHECKLIST SPECIFICATIONS
+        // =========================================================================
+        const APH_CATEGORIES = {
+            EOA: {
+                id: "EOA",
+                name: "Extension of Approval (EoA) - Existing Institutions",
+                norm: "APH 2024-27 Chapter II",
+                desc: "Mandatory annual statutory dossier required for all existing approved technical institutions.",
+                docs: [
+                    {
+                        id: "affidavit_2",
+                        title: "1. Sworn Legal Affidavit-2 (Rs. 100 E-Stamp)",
+                        clause: "Clause 7.1",
+                        desc: "Undertaking on land, building area, anti-ragging & non-violation of norms.",
+                        sampleName: "1_Affidavit_2_Royal_Institute.txt",
+                        sampleSize: "3.4 KB",
+                        sampleDetail: "Sworn: Permanent OC, 16,500 sq.m",
+                        icon: "file-text",
+                        color: "blue"
+                    },
+                    {
+                        id: "fire_noc",
+                        title: "2. State Fire Safety Clearance / NOC",
+                        clause: "Clause 7.4",
+                        desc: "Valid clearance issued by State Directorate of Fire Services.",
+                        sampleName: "2_Fire_Safety_NOC_Altered.txt",
+                        sampleSize: "2.1 KB",
+                        sampleDetail: "Exhibition Year '2027' (ELA Variance Flagged)",
+                        icon: "flame",
+                        color: "rose"
+                    },
+                    {
+                        id: "occupancy_cert",
+                        title: "3. Municipal Occupancy Certificate (OC) / Completion",
+                        clause: "Clause 7.3",
+                        desc: "Sanctioned occupancy certificate from competent local authority.",
+                        sampleName: "3_Municipal_Provisional_OC.txt",
+                        sampleSize: "2.8 KB",
+                        sampleDetail: "Provisional 1-Yr, 11,200 sq.m (Clause 7.3 limit)",
+                        icon: "landmark",
+                        color: "amber"
+                    },
+                    {
+                        id: "faculty_roster",
+                        title: "4. Teaching Faculty Master Roster",
+                        clause: "Clause 7.5 & 7.8",
+                        desc: "List of all approved faculty with salted PAN & Aadhaar tokens (1:20 norm).",
+                        sampleName: "4_Faculty_Master_Roster.txt",
+                        sampleSize: "4.2 KB",
+                        sampleDetail: "18 Verified, 2 Cross-College Collisions Detected",
+                        icon: "users",
+                        color: "purple"
+                    },
+                    {
+                        id: "prev_eoa",
+                        title: "5. Previous Academic Year AICTE Approval Order",
+                        clause: "Clause 2.4",
+                        desc: "Official EoA letter for 2023-24 detailing sanctioned program-wise intake.",
+                        sampleName: "5_AICTE_EoA_Approval_2023_24.pdf",
+                        sampleSize: "5.1 KB",
+                        sampleDetail: "Ref: F.No. Western/1-499102/2023/EOA",
+                        icon: "award",
+                        color: "emerald"
+                    },
+                    {
+                        id: "balance_sheet",
+                        title: "6. Audited Balance Sheet & Financial Statements",
+                        clause: "Clause 7.12",
+                        desc: "CA-certified balance sheet, income & expenditure with UDIN number.",
+                        sampleName: "6_Audited_Financial_Statement_FY23.pdf",
+                        sampleSize: "8.7 KB",
+                        sampleDetail: "UDIN: 24089201AAAAAB9912 Certified",
+                        icon: "file-spreadsheet",
+                        color: "sky"
+                    },
+                    {
+                        id: "land_continuation",
+                        title: "7. Contiguous Land Continuation Certificate",
+                        clause: "Clause 7.2",
+                        desc: "Certified revenue record / Khasra confirming unencumbered campus land.",
+                        sampleName: "7_Contiguous_Land_Title_Continuation.pdf",
+                        sampleSize: "4.6 KB",
+                        sampleDetail: "Survey No. 44/2A, 3.2 Acres Verified",
+                        icon: "map-pin",
+                        color: "teal"
+                    }
+                ]
+            },
+            NEW_INSTITUTION: {
+                id: "NEW_INSTITUTION",
+                name: "Establishment of New Technical Institution",
+                norm: "APH 2024-27 Chapter I",
+                desc: "Statutory foundational dossier for establishing a new college, polytechnic or university campus.",
+                docs: [
+                    {
+                        id: "affidavit_1",
+                        title: "1. Sworn Legal Affidavit-1 (Rs. 500 Stamp)",
+                        clause: "Clause 1.4",
+                        desc: "Society / Trust resolution & statutory establishment undertaking.",
+                        sampleName: "1_Affidavit_1_Society_Establishment.txt",
+                        sampleSize: "3.8 KB",
+                        sampleDetail: "Registered Society Foundation Undertaking",
+                        icon: "file-text",
+                        color: "blue"
+                    },
+                    {
+                        id: "land_deed",
+                        title: "2. Registered Land Deed / 30-Yr Govt Lease",
+                        clause: "Clause 1.6",
+                        desc: "Unencumbered registered land title document in name of applicant Society/Trust.",
+                        sampleName: "2_Registered_Land_Title_Deed.pdf",
+                        sampleSize: "9.2 KB",
+                        sampleDetail: "Registered Sale Deed No. 4910/2021 (5.0 Acres)",
+                        icon: "map",
+                        color: "emerald"
+                    },
+                    {
+                        id: "site_plan",
+                        title: "3. Master Campus Site Layout & Building Plan",
+                        clause: "Clause 1.7",
+                        desc: "Town Planning Authority / Municipal Corporation sanctioned master layout.",
+                        sampleName: "3_Approved_Master_Building_Plan.pdf",
+                        sampleSize: "14.5 KB",
+                        sampleDetail: "Sanction Ref: TCP/2023/MH/881 Sanctioned",
+                        icon: "compass",
+                        color: "purple"
+                    },
+                    {
+                        id: "structural_safety",
+                        title: "4. Structural Stability & Building Safety Certificate",
+                        clause: "Clause 1.8",
+                        desc: "Issued by State PWD or Certified Govt Structural Engineer.",
+                        sampleName: "4_Structural_Stability_PWD.pdf",
+                        sampleSize: "3.1 KB",
+                        sampleDetail: "Zone III Seismic & Load Compliance Certified",
+                        icon: "shield",
+                        color: "amber"
+                    },
+                    {
+                        id: "barrier_free",
+                        title: "5. Barrier-Free Built Environment Certificate",
+                        clause: "Clause 1.10",
+                        desc: "Certification of ramps, tactile tiles, lift & accessible toilets for Divyangjan.",
+                        sampleName: "5_Barrier_Free_Access_Audit.pdf",
+                        sampleSize: "2.7 KB",
+                        sampleDetail: "PWD Accessible India Guidelines Compliant",
+                        icon: "accessibility",
+                        color: "sky"
+                    },
+                    {
+                        id: "state_noc",
+                        title: "6. State Government Permission / NOC",
+                        clause: "Clause 1.5",
+                        desc: "No Objection Certificate issued by Department of Technical Education.",
+                        sampleName: "6_State_Govt_Technical_Edu_NOC.pdf",
+                        sampleSize: "3.3 KB",
+                        sampleDetail: "Govt Order No. DTE-2023/NOC/481",
+                        icon: "landmark",
+                        color: "rose"
+                    },
+                    {
+                        id: "university_noc",
+                        title: "7. Affiliating University In-Principle NOC",
+                        clause: "Clause 1.5.2",
+                        desc: "In-principle affiliation intent letter from recognized University.",
+                        sampleName: "7_University_Affiliation_Consent.pdf",
+                        sampleSize: "4.1 KB",
+                        sampleDetail: "Affiliation Intent Ref: SPPU/AFF/2024/902",
+                        icon: "graduation-cap",
+                        color: "indigo"
+                    },
+                    {
+                        id: "endowment_fdr",
+                        title: "8. Endowment Fund Bank Guarantee / FDR Receipts",
+                        clause: "Clause 1.12",
+                        desc: "Joint Fixed Deposit Receipt in favor of AICTE & Society for Rs. 1.00 Crore.",
+                        sampleName: "8_Endowment_FDR_Receipt_Joint.pdf",
+                        sampleSize: "2.9 KB",
+                        sampleDetail: "SBI Lien Fixed Deposit Rs. 10,000,000 Verified",
+                        icon: "badge-percent",
+                        color: "teal"
+                    }
+                ]
+            },
+            INTAKE_EXPANSION: {
+                id: "INTAKE_EXPANSION",
+                name: "Increase in Intake / Additional Course(s)",
+                norm: "APH 2024-27 Chapter II/III",
+                desc: "Statutory requirements for existing institutions requesting intake expansion or new degree divisions.",
+                docs: [
+                    {
+                        id: "governing_resolution",
+                        title: "1. Governing Body Resolution for Intake Expansion",
+                        clause: "Clause 2.9",
+                        desc: "Formal Trust/Society board minutes approving new division or PG course.",
+                        sampleName: "1_Governing_Body_Intake_Resolution.pdf",
+                        sampleSize: "2.6 KB",
+                        sampleDetail: "+120 Seats CSE (AI & Data Science) Approved",
+                        icon: "file-check",
+                        color: "blue"
+                    },
+                    {
+                        id: "nba_accreditation",
+                        title: "2. NBA Accreditation Certificate (Mandatory)",
+                        clause: "Clause 2.10",
+                        desc: "Valid NBA Tier-I/II accreditation for at least 50% eligible programmes.",
+                        sampleName: "2_NBA_Accreditation_Certificate.pdf",
+                        sampleSize: "4.8 KB",
+                        sampleDetail: "Accredited Tier-II Validity: 2022-2025 (Active)",
+                        icon: "award",
+                        color: "emerald"
+                    },
+                    {
+                        id: "additional_carpet_area",
+                        title: "3. Additional Instructional & Lab Built-Up Area Certificate",
+                        clause: "Clause 2.11",
+                        desc: "Architect certificate for additional classrooms & specialized laboratories.",
+                        sampleName: "3_Additional_Lab_Carpet_Area_Audit.pdf",
+                        sampleSize: "5.4 KB",
+                        sampleDetail: "+1,420 sq.m New Lab Area with Geotagged Photos",
+                        icon: "maximize-2",
+                        color: "amber"
+                    },
+                    {
+                        id: "dead_stock_register",
+                        title: "4. Equipment Dead-Stock & Utilization Register",
+                        clause: "Clause 2.13",
+                        desc: "Certified purchase bills and dead-stock register for new course hardware.",
+                        sampleName: "4_Lab_Hardware_Dead_Stock_Register.pdf",
+                        sampleSize: "6.9 KB",
+                        sampleDetail: "90 High-End Workstations & GPU Cluster Invoices",
+                        icon: "cpu",
+                        color: "purple"
+                    },
+                    {
+                        id: "affidavit_2_expansion",
+                        title: "5. Sworn Legal Affidavit-2 (No-Deficiency Declaration)",
+                        clause: "Clause 2.14",
+                        desc: "Affidavit undertaking zero pending faculty and infrastructural deficiency.",
+                        sampleName: "5_Affidavit_2_Expansion_Undertaking.txt",
+                        sampleSize: "3.1 KB",
+                        sampleDetail: "Sworn Compliance with Faculty-Student Norm 1:20",
+                        icon: "file-text",
+                        color: "rose"
+                    },
+                    {
+                        id: "safety_endorsement",
+                        title: "6. Fire & Structural Capacity Endorsement",
+                        clause: "Clause 2.15",
+                        desc: "Supplemental fire NOC endorsement covering augmented building occupants.",
+                        sampleName: "6_Fire_Occupancy_Enhanced_Endorsement.pdf",
+                        sampleSize: "3.5 KB",
+                        sampleDetail: "Evacuation Plan & Hydrant Coverage Endorsed",
+                        icon: "flame",
+                        color: "teal"
+                    }
+                ]
+            },
+            CLOSURE: {
+                id: "CLOSURE",
+                name: "Closure of Course / Technical Institution",
+                norm: "APH 2024-27 Chapter IX",
+                desc: "Statutory documents for voluntary phase-out, division closure or complete institutional closure.",
+                docs: [
+                    {
+                        id: "trust_closure_res",
+                        title: "1. Governing Body Resolution for Closure",
+                        clause: "Clause 9.1",
+                        desc: "Resolution stating reasons for progressive or complete institutional closure.",
+                        sampleName: "1_Trust_Closure_Resolution.pdf",
+                        sampleSize: "2.2 KB",
+                        sampleDetail: "Progressive Closure of Mechanical Engg Division",
+                        icon: "file-minus",
+                        color: "rose"
+                    },
+                    {
+                        id: "state_closure_noc",
+                        title: "2. State Government No Objection Certificate",
+                        clause: "Clause 9.2",
+                        desc: "Concurrence from State Higher & Technical Education department.",
+                        sampleName: "2_State_Govt_Closure_Concurrence.pdf",
+                        sampleSize: "3.0 KB",
+                        sampleDetail: "Concurrence Ref: DTE/CLS/2024/114",
+                        icon: "landmark",
+                        color: "amber"
+                    },
+                    {
+                        id: "student_transfer_plan",
+                        title: "3. Affiliating University NOC & Student Transfer Plan",
+                        clause: "Clause 9.3",
+                        desc: "University approved migration matrix ensuring zero academic loss to enrolled batches.",
+                        sampleName: "3_University_Student_Transfer_Matrix.pdf",
+                        sampleSize: "4.4 KB",
+                        sampleDetail: "42 Students Mapped to Neighboring Affiliated College",
+                        icon: "git-branch",
+                        color: "blue"
+                    },
+                    {
+                        id: "terminal_undertaking",
+                        title: "4. Statutory Zero Student Liability & Staff Dues Clearance",
+                        clause: "Clause 9.5",
+                        desc: "Sworn legal undertaking that all security deposits and staff dues are cleared.",
+                        sampleName: "4_Statutory_Zero_Liability_Undertaking.pdf",
+                        sampleSize: "3.2 KB",
+                        sampleDetail: "All PF, Gratuity & Student Caution Money Cleared",
+                        icon: "shield-alert",
+                        color: "emerald"
+                    }
+                ]
+            }
+        };
 
-        function handleUserFileUpload(event, slotType) {
-            const file = event.target.files[0];
-            if (!file) return;
+        // Current Active Category and Staged Upload Files State
+        let currentAppCategory = 'EOA';
+        let stagedCategoryFiles = {}; // { docId: { file: File|null, sample: boolean, meta: {...} } }
+        let currentTargetDocId = null;
 
-            uploadedSlots[slotType] = true;
-            dossierLoaded = true;
+        // Dynamic Document Upload Renderer
+        function renderDynamicUploadSlots(categoryKey) {
+            currentAppCategory = categoryKey || 'EOA';
+            const catSpec = APH_CATEGORIES[currentAppCategory];
+            if (!catSpec) return;
 
-            const sizeKB = (file.size / 1024).toFixed(1);
-            const statusBadge = document.getElementById(`slot-${slotType}-status`);
-            statusBadge.className = "text-[11px] font-bold px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1";
-            statusBadge.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> ${sizeKB} KB`;
+            // Update Meta Strip
+            document.getElementById("catBadgeNorm").innerText = catSpec.norm;
+            document.getElementById("catDescText").innerText = catSpec.desc;
+            document.getElementById("catDocCountBadge").innerText = `${catSpec.docs.length} Documents Prescribed`;
+            document.getElementById("docListHeaderTitle").innerHTML = `<i data-lucide="folder-check" class="w-4 h-4 text-govBlue"></i><span>Mandatory Statutory Checklist (${catSpec.docs.length} Documents)</span>`;
 
-            const descElem = document.getElementById(`slot-${slotType}-desc`);
-            descElem.innerHTML = `<span class="text-emerald-700 font-bold truncate block max-w-xs">✓ ${file.name}</span>`;
+            // Reset or retain staged files
+            if (!stagedCategoryFiles[currentAppCategory]) {
+                stagedCategoryFiles[currentAppCategory] = {};
+            }
 
-            // Check if at least 1 file is uploaded to enable execution
-            const uploadedCount = Object.values(uploadedSlots).filter(Boolean).length;
-            const btn = document.getElementById("btnStartPipeline");
-            btn.disabled = false;
-            btn.className = "w-full bg-govNavy hover:bg-govBlue text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer border-2 border-govSaffron animate-pulse";
-            btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5 text-govSaffron fill-govSaffron"></i><span>Trigger AI Scrutiny Pipeline (${uploadedCount}/4 Files Uploaded)</span>`;
+            const container = document.getElementById("dynamicDocSlotsContainer");
+            container.innerHTML = "";
+
+            catSpec.docs.forEach((doc, idx) => {
+                const staged = stagedCategoryFiles[currentAppCategory][doc.id];
+                const isUploaded = !!staged;
+
+                const slotDiv = document.createElement("div");
+                slotDiv.id = `slot-${doc.id}`;
+                slotDiv.className = `p-3.5 bg-slate-50 hover:bg-blue-50/50 border-2 ${isUploaded ? 'border-emerald-400 bg-emerald-50/30' : 'border-dashed border-slate-300 hover:border-govBlue'} rounded-xl flex items-center justify-between gap-3 cursor-pointer transition group`;
+                slotDiv.onclick = () => triggerDynamicFileInput(doc.id);
+
+                let badgeHtml = "";
+                let descHtml = "";
+
+                if (isUploaded) {
+                    badgeHtml = `<span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> ${staged.sizeText || 'Ready'}</span>`;
+                    descHtml = `<span class="text-emerald-700 font-bold truncate block max-w-sm">✓ ${staged.nameText}</span><span class="text-[10px] text-slate-500 font-mono">${staged.detailText || ''}</span>`;
+                } else {
+                    badgeHtml = `<span class="text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700 group-hover:bg-govBlue group-hover:text-white transition">Choose File</span>`;
+                    descHtml = `<span class="text-[11px] text-slate-500">${doc.desc}</span>`;
+                }
+
+                slotDiv.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-${doc.color}-100 text-${doc.color}-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                            <i data-lucide="${doc.icon}" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-900 group-hover:text-govBlue transition flex items-center gap-1.5">
+                                <span>${doc.title}</span>
+                                <span class="text-[10px] text-slate-400 font-mono font-normal">(${doc.clause})</span>
+                                <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-400 group-hover:text-govBlue"></i>
+                            </div>
+                            <div id="desc-${doc.id}" class="mt-0.5">${descHtml}</div>
+                        </div>
+                    </div>
+                    <div id="badge-${doc.id}">${badgeHtml}</div>
+                `;
+                container.appendChild(slotDiv);
+            });
+
+            updatePipelineButtonState();
+            lucide.createIcons();
+        }
+
+        function handleCategoryChange(categoryKey) {
+            currentAppCategory = categoryKey;
+            renderDynamicUploadSlots(categoryKey);
 
             const consoleBox = document.getElementById("liveConsoleFeed");
-            consoleBox.innerHTML += `<div class="text-emerald-400 font-mono text-[11px]">✓ Received File: <strong>${file.name}</strong> (${sizeKB} KB) staged for ${slotType.toUpperCase()} slot.</div>`;
+            consoleBox.innerHTML = `
+                <div class="text-amber-300 font-bold">// Active Application Category Changed:</div>
+                <div class="text-white font-mono font-bold">• ${APH_CATEGORIES[categoryKey].name}</div>
+                <div class="text-slate-400">• Prescribed Norm: ${APH_CATEGORIES[categoryKey].norm} (${APH_CATEGORIES[categoryKey].docs.length} Statutory Checklist Files)</div>
+                <div class="text-emerald-400 text-[11px] mt-1">👉 Click "Auto-Fill Category Samples" or browse custom files from your machine.</div>
+            `;
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+
+        function triggerDynamicFileInput(docId) {
+            currentTargetDocId = docId;
+            document.getElementById("genericDynamicFileInput").click();
+        }
+
+        function handleDynamicInputFileChange(event) {
+            const file = event.target.files[0];
+            if (!file || !currentTargetDocId) return;
+
+            const sizeKB = (file.size / 1024).toFixed(1);
+            if (!stagedCategoryFiles[currentAppCategory]) {
+                stagedCategoryFiles[currentAppCategory] = {};
+            }
+
+            stagedCategoryFiles[currentAppCategory][currentTargetDocId] = {
+                file: file,
+                nameText: file.name,
+                sizeText: `${sizeKB} KB`,
+                detailText: `Custom Upload (${file.type || 'Binary'})`,
+                sample: false
+            };
+
+            renderDynamicUploadSlots(currentAppCategory);
+
+            const consoleBox = document.getElementById("liveConsoleFeed");
+            consoleBox.innerHTML += `<div class="text-emerald-400 font-mono text-[11px]">✓ Received File: <strong>${file.name}</strong> (${sizeKB} KB) for slot [${currentTargetDocId}].</div>`;
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+
+            event.target.value = "";
+        }
+
+        function autoLoadCurrentCategorySample() {
+            const catSpec = APH_CATEGORIES[currentAppCategory];
+            if (!catSpec) return;
+
+            if (!stagedCategoryFiles[currentAppCategory]) {
+                stagedCategoryFiles[currentAppCategory] = {};
+            }
+
+            catSpec.docs.forEach(doc => {
+                stagedCategoryFiles[currentAppCategory][doc.id] = {
+                    file: null,
+                    nameText: doc.sampleName,
+                    sizeText: `Ready (${doc.sampleSize})`,
+                    detailText: doc.sampleDetail,
+                    sample: true
+                };
+            });
+
+            renderDynamicUploadSlots(currentAppCategory);
+
+            const consoleBox = document.getElementById("liveConsoleFeed");
+            consoleBox.innerHTML = `
+                <div class="text-emerald-400 font-bold">✓ All ${catSpec.docs.length} Statutory Checklist Files Staged for ${catSpec.name}</div>
+                <div class="text-slate-300">• Applicant: Royal Institute of Advanced Studies [AICTE-1-499102]</div>
+                <div class="text-slate-400">• Prescribed Norm: ${catSpec.norm}</div>
+                <div class="text-amber-300 font-bold mt-2">👉 Click "Trigger Multi-Engine AI Scrutiny" to execute live verification pipeline!</div>
+            `;
             consoleBox.scrollTop = consoleBox.scrollHeight;
             lucide.createIcons();
         }
 
-        function autoLoadSampleDossier() {
-            dossierLoaded = true;
-            uploadedSlots = { affidavit: true, fire: true, oc: true, faculty: true };
+        function updatePipelineButtonState() {
+            const catSpec = APH_CATEGORIES[currentAppCategory];
+            if (!catSpec) return;
 
-            // Update UI slots
-            document.getElementById("slot-affidavit-desc").innerHTML = `<span class="text-emerald-700 font-semibold">✓ 1_Affidavit_2_Royal_Institute.txt</span> (Sworn: Permanent OC, 16,500 sq.m)`;
-            document.getElementById("slot-affidavit-status").className = "text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
-            document.getElementById("slot-affidavit-status").innerText = "Ready (3.4 KB)";
-
-            document.getElementById("slot-fire-desc").innerHTML = `<span class="text-emerald-700 font-semibold">✓ 2_Fire_Safety_NOC_Altered.txt</span> (Exhibition of Year '2027')`;
-            document.getElementById("slot-fire-status").className = "text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
-            document.getElementById("slot-fire-status").innerText = "Ready (2.1 KB)";
-
-            document.getElementById("slot-oc-desc").innerHTML = `<span class="text-emerald-700 font-semibold">✓ 3_Municipal_Provisional_OC.txt</span> (Provisional 1-Yr, 11,200 sq.m)`;
-            document.getElementById("slot-oc-status").className = "text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
-            document.getElementById("slot-oc-status").innerText = "Ready (2.8 KB)";
-
-            document.getElementById("slot-faculty-desc").innerHTML = `<span class="text-emerald-700 font-semibold">✓ 4_Faculty_Master_Roster.txt</span> (18 Listed, 2 Potential Collisions)`;
-            document.getElementById("slot-faculty-status").className = "text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
-            document.getElementById("slot-faculty-status").innerText = "Ready (4.2 KB)";
-
-            // Enable Start Button
+            const currentStaged = stagedCategoryFiles[currentAppCategory] || {};
+            const uploadedCount = Object.keys(currentStaged).length;
+            const totalRequired = catSpec.docs.length;
             const btn = document.getElementById("btnStartPipeline");
-            btn.disabled = false;
-            btn.className = "w-full bg-govNavy hover:bg-govBlue text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer border-2 border-govSaffron animate-pulse";
-            btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5 text-govSaffron fill-govSaffron"></i><span>Trigger End-to-End Live Ingestion & AI Scrutiny</span>`;
 
-            // Console output
-            const consoleBox = document.getElementById("liveConsoleFeed");
-            consoleBox.innerHTML = `
-                <div class="text-emerald-400 font-bold">✓ 4 Statutory Files Staged from demo_samples/</div>
-                <div class="text-slate-400">• Institution: Royal Institute of Advanced Studies [AICTE-1-499102]</div>
-                <div class="text-slate-400">• Application: Extension of Approval + Intake Expansion (+120 Seats)</div>
-                <div class="text-amber-300 font-bold mt-2">👉 Click "Trigger End-to-End Live Ingestion" to run live pipeline!</div>
-            `;
-            lucide.createIcons();
+            if (uploadedCount > 0) {
+                btn.disabled = false;
+                btn.className = "w-full bg-govNavy hover:bg-govBlue text-white font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer border-2 border-govSaffron animate-pulse";
+                btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5 text-govSaffron fill-govSaffron"></i><span>Trigger Multi-Engine AI Scrutiny (${uploadedCount}/${totalRequired} Files Staged)</span>`;
+            } else {
+                btn.disabled = true;
+                btn.className = "w-full bg-slate-300 text-slate-600 font-bold py-3 px-4 rounded-xl shadow-xs transition flex items-center justify-center gap-2 cursor-not-allowed";
+                btn.innerHTML = `<i data-lucide="play-circle" class="w-5 h-5"></i><span>Select or Auto-Fill Files to Trigger Multi-Engine Scrutiny</span>`;
+            }
         }
 
-        async function executeLivePipelineWalkthrough() {
+        async function executeDynamicPipeline() {
             const btn = document.getElementById("btnStartPipeline");
             btn.disabled = true;
             btn.className = "w-full bg-slate-800 text-slate-400 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 cursor-wait";
@@ -1056,17 +1788,49 @@
             lucide.createIcons();
 
             const consoleBox = document.getElementById("liveConsoleFeed");
-            const logs = [
-                { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Computing SHA-256 non-repudiation hashes & verifying DPDP privacy vault...` },
-                { delay: 700, text: `<span class="text-blue-400">[2/5 PARSING]</span> Docling Layout Engine + RapidOCR extracting 14 key regulatory entities...` },
-                { delay: 1100, text: `<span class="text-amber-400">[3/5 TRIANGULATION]</span> <strong class="text-rose-400">PERJURY DETECTED!</strong> Affidavit swears Permanent OC, but Municipal file is Provisional 1-yr!` },
-                { delay: 1500, text: `<span class="text-amber-400">[3/5 TRIANGULATION]</span> <strong class="text-rose-400">AREA INFLATION!</strong> Sworn 16,500 sq.m vs Municipal Certified 11,200 sq.m (32% deficit).` },
-                { delay: 1900, text: `<span class="text-purple-400">[4/5 FORENSICS]</span> pyHanko checking PAdES digital signature... <span class="text-rose-400">FAILED: Post-sign bytes injected!</span>` },
-                { delay: 2300, text: `<span class="text-purple-400">[4/5 FORENSICS]</span> Error Level Analysis (ELA): <span class="text-rose-400">4.82x compression variance</span> on Fire NOC year '2027'.` },
-                { delay: 2700, text: `<span class="text-emerald-400">[5/5 GRAPH AUDIT]</span> Faculty Integrity Graph: <span class="text-rose-400">2 GHOST FACULTY COLLISIONS</span> with Greenfield Tech (INST_101).` },
-                { delay: 3100, text: `<span class="text-rose-400 font-bold">[RESULT]</span> Computed Regulatory Trust Index (RTI): <strong class="text-white bg-rose-700 px-1.5 py-0.5 rounded">28.5/100 (RED TRACK)</strong>` },
-                { delay: 3500, text: `<span class="text-emerald-300 font-bold">✓ Sealed to Merkle Audit Block #4. Dossier dispatched to AICTE Scrutiny Committee!</span>` }
-            ];
+            consoleBox.innerHTML = `<div class="text-blue-400 font-mono">// INITIALIZING SATYA-SHIKSHA PIPELINE FOR [${currentAppCategory}]...</div>`;
+
+            let logs = [];
+            if (currentAppCategory === 'EOA') {
+                logs = [
+                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Computing SHA-256 non-repudiation hashes & verifying DPDP privacy vault...` },
+                    { delay: 650, text: `<span class="text-blue-400">[2/5 PARSING]</span> Docling Layout Engine + RapidOCR extracting 14 key regulatory entities...` },
+                    { delay: 1050, text: `<span class="text-amber-400">[3/5 TRIANGULATION]</span> <strong class="text-rose-400">PERJURY DETECTED!</strong> Affidavit swears Permanent OC, but Municipal file is Provisional 1-yr!` },
+                    { delay: 1400, text: `<span class="text-amber-400">[3/5 TRIANGULATION]</span> <strong class="text-rose-400">AREA INFLATION!</strong> Sworn 16,500 sq.m vs Municipal Certified 11,200 sq.m (32% deficit).` },
+                    { delay: 1800, text: `<span class="text-purple-400">[4/5 FORENSICS]</span> pyHanko checking PAdES digital signature... <span class="text-rose-400">FAILED: Post-sign bytes injected!</span>` },
+                    { delay: 2200, text: `<span class="text-purple-400">[4/5 FORENSICS]</span> Error Level Analysis (ELA): <span class="text-rose-400">4.82x compression variance</span> on Fire NOC year '2027'.` },
+                    { delay: 2600, text: `<span class="text-emerald-400">[5/5 GRAPH AUDIT]</span> Faculty Integrity Graph: <span class="text-rose-400">2 GHOST FACULTY COLLISIONS</span> with Greenfield Tech (INST_101).` },
+                    { delay: 3000, text: `<span class="text-rose-400 font-bold">[RESULT]</span> Computed Regulatory Trust Index (RTI): <strong class="text-white bg-rose-700 px-1.5 py-0.5 rounded">28.5/100 (RED TRACK)</strong>` },
+                    { delay: 3400, text: `<span class="text-emerald-300 font-bold">✓ Sealed to Merkle Audit Block #4. Dossier dispatched to AICTE Scrutiny Committee!</span>` }
+                ];
+            } else if (currentAppCategory === 'NEW_INSTITUTION') {
+                logs = [
+                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Checking Society Deed, Land Title & 30-Year Lease deed verification...` },
+                    { delay: 650, text: `<span class="text-blue-400">[2/5 PARSING]</span> Town Planning Authority Master Plan layout extraction: 5.0 contiguous acres.` },
+                    { delay: 1050, text: `<span class="text-emerald-400">[3/5 LAND NORMS]</span> Contiguous acreage (5.0 Acres in Rural Zone >= 4.0 norm) -> <span class="text-emerald-300 font-bold">VERIFIED</span>.` },
+                    { delay: 1400, text: `<span class="text-emerald-400">[4/5 SAFETY & PWD]</span> Structural Stability & Barrier-Free Environment -> <span class="text-emerald-300 font-bold">VERIFIED</span>.` },
+                    { delay: 1800, text: `<span class="text-purple-400">[5/5 ENDOWMENT]</span> Joint Fixed Deposit Receipt Rs. 1.00 Crore verified via SBI API lien gateway.` },
+                    { delay: 2200, text: `<span class="text-emerald-400 font-bold">[RESULT]</span> Computed Regulatory Trust Index (RTI): <strong class="text-slate-900 bg-emerald-300 px-1.5 py-0.5 rounded">94.0/100 (GREEN TRACK)</strong>` },
+                    { delay: 2600, text: `<span class="text-emerald-300 font-bold">✓ Stage-1 Scrutiny Passed. Recommend Physical EVC Inspection for final Letter of Approval.</span>` }
+                ];
+            } else if (currentAppCategory === 'INTAKE_EXPANSION') {
+                logs = [
+                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Validating Governing Body Resolution & NBA Accreditation Certificate...` },
+                    { delay: 650, text: `<span class="text-emerald-400">[2/5 ACCREDITATION]</span> NBA Tier-II Accreditation valid till 2025 -> <span class="text-emerald-300 font-bold">ELIGIBLE</span>.` },
+                    { delay: 1050, text: `<span class="text-amber-400">[3/5 INFRASTRUCTURE]</span> Additional carpet area (+1,420 sq.m) satisfies APH 2024-27 Clause 2.11.` },
+                    { delay: 1450, text: `<span class="text-rose-400">[4/5 FACULTY PREREQ]</span> Current verified FSR is 1:22.8 (Deficit of 4 Professors before expansion permitted).` },
+                    { delay: 1850, text: `<span class="text-amber-400 font-bold">[RESULT]</span> Computed Regulatory Trust Index (RTI): <strong class="text-slate-900 bg-amber-400 px-1.5 py-0.5 rounded">66.5/100 (AMBER TRACK)</strong>` },
+                    { delay: 2250, text: `<span class="text-amber-300 font-bold">✓ Deficiency Notice drafted: Cure faculty deficit before seat increase approval.</span>` }
+                ];
+            } else {
+                logs = [
+                    { delay: 300, text: `<span class="text-blue-400">[1/5 INGESTION]</span> Verifying Trust Closure Resolution & State Government Concurrence...` },
+                    { delay: 650, text: `<span class="text-blue-400">[2/5 NOC CHECK]</span> State Technical Education Department NOC DTE/CLS/2024/114 confirmed.` },
+                    { delay: 1050, text: `<span class="text-emerald-400">[3/5 MIGRATION]</span> 42 affected students successfully mapped to neighboring institutions.` },
+                    { delay: 1450, text: `<span class="text-emerald-400">[4/5 LIABILITIES]</span> Statutory Zero Liability & Staff Terminal Settlement Undertaking -> <span class="text-emerald-300 font-bold">VERIFIED</span>.` },
+                    { delay: 1850, text: `<span class="text-emerald-400 font-bold">[RESULT]</span> Order of Progressive Closure formulated for AICTE Executive Committee sign-off.` }
+                ];
+            }
 
             for (const log of logs) {
                 await new Promise(r => setTimeout(r, log.delay));
@@ -1075,10 +1839,116 @@
             }
 
             btn.className = "w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2";
-            btn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-white"></i><span>Analysis Complete (0.42s Total Compute)</span>`;
+            btn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-white"></i><span>Analysis Complete (${currentAppCategory})</span>`;
             
             document.getElementById("jumpToScrutinySection").classList.remove("hidden");
             lucide.createIcons();
+        }
+
+        // =========================================================================
+        // ROLE SELECTION & HOME PAGE AUTHENTICATION LOGIC
+        // =========================================================================
+        let currentActiveRole = 'OFFICER';
+
+        function handleRoleChange(role, autoNavigate = false) {
+            currentActiveRole = role;
+            const selector = document.getElementById("userRoleSelector");
+            if (selector) selector.value = role;
+
+            const badgeText = document.getElementById("navUserIdentityText");
+            if (role === 'COLLEGE') {
+                if (badgeText) badgeText.innerText = "Registrar: Royal Institute (AICTE-1-499102)";
+                if (autoNavigate) switchTab('tab-upload');
+            } else if (role === 'EVC') {
+                if (badgeText) badgeText.innerText = "EVC Inspector: Prof. K. Meenakshi (EVC-MH-7721)";
+                if (autoNavigate) {
+                    switchTab('tab-scrutiny');
+                    filterQueue('RED');
+                }
+            } else {
+                if (badgeText) badgeText.innerText = "Officer: Dr. S. Ramanathan (Bureau Chief)";
+                if (autoNavigate) switchTab('tab-scrutiny');
+            }
+            lucide.createIcons();
+        }
+
+        function loginAsRole(role) {
+            handleRoleChange(role, true);
+        }
+
+        function switchHomeAuthTab(tab) {
+            const btnLogin = document.getElementById("btnHomeAuthLogin");
+            const btnReg = document.getElementById("btnHomeAuthRegister");
+            const containerLogin = document.getElementById("homeLoginFormContainer");
+            const containerReg = document.getElementById("homeRegisterFormContainer");
+
+            if (tab === 'login') {
+                btnLogin.className = "flex-1 py-3 px-4 text-xs sm:text-sm font-bold text-govNavy border-b-2 border-govBlue bg-white flex items-center justify-center gap-2";
+                btnReg.className = "flex-1 py-3 px-4 text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center gap-2 transition";
+                containerLogin.classList.remove("hidden");
+                containerReg.classList.add("hidden");
+            } else {
+                btnReg.className = "flex-1 py-3 px-4 text-xs sm:text-sm font-bold text-govNavy border-b-2 border-govBlue bg-white flex items-center justify-center gap-2";
+                btnLogin.className = "flex-1 py-3 px-4 text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-800 flex items-center justify-center gap-2 transition";
+                containerReg.classList.remove("hidden");
+                containerLogin.classList.add("hidden");
+            }
+            lucide.createIcons();
+        }
+
+        function refreshCaptcha() {
+            const chars = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+            let code = "";
+            for (let i = 0; i < 5; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            const el = document.getElementById("captchaDisplay");
+            if (el) el.innerText = code;
+        }
+
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (!field) return;
+            if (field.type === "password") {
+                field.type = "text";
+            } else {
+                field.type = "password";
+            }
+        }
+
+        function handleLoginFormSubmit(event) {
+            event.preventDefault();
+            const role = document.getElementById("loginRole").value;
+            const userId = document.getElementById("loginUserId").value;
+            const captchaInput = document.getElementById("loginCaptchaInput").value.trim().toUpperCase();
+            const captchaCode = document.getElementById("captchaDisplay").innerText.trim().toUpperCase();
+
+            if (captchaInput !== captchaCode) {
+                alert("Security CAPTCHA verification failed. Please try again.");
+                refreshCaptcha();
+                return;
+            }
+
+            alert(`✓ Authentication Successful!
+Welcome to SATYA-SHIKSHA Gateway.
+Logged in as: ${role} (${userId})`);
+            loginAsRole(role);
+        }
+
+        function handleRegisterFormSubmit(event) {
+            event.preventDefault();
+            const instName = document.getElementById("regInstName").value;
+            const aicteId = document.getElementById("regAicteId").value;
+            const role = document.getElementById("regRole").value;
+
+            alert(`✓ Registration Application Received!
+Institution: ${instName}
+Permanent ID: ${aicteId}
+
+Your identity credentials have been cryptographically linked to the AICTE Master Ledger. You can now sign in.`);
+            switchHomeAuthTab('login');
+            document.getElementById("loginUserId").value = aicteId;
+            document.getElementById("loginRole").value = role;
         }
 
         function jumpToScrutinyWithTarget(appId) {
