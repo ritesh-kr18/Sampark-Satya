@@ -1,0 +1,28 @@
+# ALL INDIA COUNCIL FOR TECHNICAL EDUCATION (AICTE)
+## FACULTY MASTER REGISTRATION DECLARATION (2024-25)
+Institution Name: Royal Institute of Advanced Studies, Pune (ID: AICTE-1-499102)
+Approved Intake: 480 Students in UG Engineering (Requires 24 full-time faculty for 1:20 norm)
+Total Faculty Declared on Portal: 18 (Deficit of 6 faculty)
+
+DECLARATION OF APPOINTED REGULAR FULL-TIME TEACHING FACULTY:
+
+1. Dr. R. K. Sharma | Designation: Professor & HOD (Computer Engg)
+   PAN: ABCPS1234F | AICTE Faculty ID: 1-4829104 | Joining Date: 15-Jan-2023
+   *[INTEGRITY GRAPH ALERT: Also registered as active Professor at Greenfield Institute of Technology, ID: INST_101]*
+
+2. Dr. Anita Verma | Designation: Associate Professor (Electronics & Telecom)
+   PAN: BZXPV9876K | AICTE Faculty ID: 1-9921023 | Joining Date: 01-Aug-2023
+   *[INTEGRITY GRAPH ALERT: Also registered as active faculty at Greenfield Institute of Technology, ID: INST_101]*
+
+3. Prof. Sandeep Deshmukh | Designation: Assistant Professor (Mechanical Engg)
+   PAN: DKLPD4491M | AICTE Faculty ID: 1-7718290 | Joining Date: 01-July-2022
+   Status: Verified Regular Faculty
+
+4. Prof. Meera Kulkarni | Designation: Assistant Professor (Applied Sciences)
+   PAN: AOPPK8812L | AICTE Faculty ID: 1-3391820 | Joining Date: 10-Aug-2021
+   Status: Verified Regular Faculty
+
+[Remaining 14 Assistant Professors listed in portal master roster...]
+
+Total Verified Faculty: 18 / 24 Required.
+Calculated Faculty-to-Student Ratio: 1:26.6 (Breaches mandatory 1:20 norm under APH Annexure-5).
