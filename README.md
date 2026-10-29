@@ -7,7 +7,7 @@ The platform automates the scrutiny of Extension of Approval (EoA), New Institut
 
 ---
 
-## 🏛️ Key Capabilities
+## Key Capabilities
 
 1. **Category-Based Checklists & Rule Engine:** Automated validation for Faculty-to-Student Ratios (FSR 1:20 norm), Provisional Occupancy Certificate limits (max 2 consecutive years per APH Clause 7.3), Fire Safety NOC validity, and land acreage standards.
 2. **National Faculty Integrity Graph (FIG):** Privacy-preserving temporal bipartite graph detecting concurrent dual-employment across multiple institutions (DPDP Act 2023 compliant using salted SHA-256 tokens; zero raw Aadhaar stored).
@@ -41,8 +41,3 @@ The platform automates the scrutiny of Extension of Approval (EoA), New Institut
 └── README.md                        # Project documentation
 ```
 
----
-
-## 🔒 Security & Statutory Safeguards
-* **Non-Adverse AI Decision Support:** AI outputs are strictly decision-support indicators. All adverse regulatory actions (issuing deficiency notices, scheduling surprise inspections, or withholding approval) require human review and digital sign-off by authorized regulatory officers.
-* **Data Privacy Compliance:** Eliminates raw Aadhaar storage by utilizing cryptographic salted hashes of PAN and AICTE Faculty IDs in compliance with the Digital Personal Data Protection (DPDP) Act 2023 and UIDAI guidelines.
